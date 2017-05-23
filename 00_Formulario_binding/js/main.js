@@ -22,6 +22,8 @@
 			// Definicion de los manejadores de eventos
 
 			oDOM.fNombre.addEventListener("keyup",actualizarVista);
+
+			//oDOM.btnBorrar.onclick = actualizarVista;
 			oDOM.btnBorrar.addEventListener("click",actualizarVista)
 		}
 
@@ -29,8 +31,10 @@
 			
 			if (oEvent.currentTarget.id == "btnBorrar") {
 				oDOM.fNombre.value = ''
-			}	
+			} 
 			oDOM.spanNombre.innerHTML = oDOM.fNombre.value; 
+	
+			
 			console.log(oDOM.fNombre.value);
 
 		} // Fin de la funcion actualizarVista
