@@ -1,0 +1,96 @@
+﻿<!DOCTYPE HTML>
+<html lang="es">
+<head>
+	<meta charset="UTF-8">
+	<title>DOM - JavaScript_001</title>
+	<meta name="description" content="Ejercicios del Curso CMF">
+	<meta name="author" content="Alejandro">
+    <link rel="shortcut icon" href="fav_icon.png">
+  	<link href="../../../_bootstrap/css/bootstrap.min.css" rel="stylesheet">
+  	<link rel="stylesheet" href="default.css">
+  	<script type="text/javascript" href="../../../_bootstrap/js/bootstrap.js"></script>
+  	<script type="text/javascript">
+
+        // Se incluye la definición de los manejadores de eventos dentro del propio objeto
+
+
+        //***************************************************************
+        // Se crea la "CLASE" Crono
+        //***************************************************************
+
+        // Definición de la Función Constructora de la Pseudoclase Crono
+        function Crono(posicion, btn1, btn2) {
+            this.idTimer = 0; //identificador del proces setInterval
+            this.t = 0 // Contador de tiempo
+            this.domCrono = document.getElementById(posicion);
+            // nodo del punto HTML donde se pinta el crono
+            this.domBtn1 = document.getElementById(btn1); // nodo del botón Iniciar / Parar
+            this.domBtn2 = document.getElementById(btn2); // nodo del botón resetear
+
+            // Definición de los manejadores de eventos 
+            // para los botones recibidos como parámetros
+            this.domBtn1.onclick = this.cambiarCrono.bind(this);
+            this.domBtn2.onclick = this.limpiarCrono.bind(this);
+        }
+
+        // Se añaden métodos al prototipo 
+        Crono.prototype.mostrar = function () {
+            this.t += 0.1;
+            this.domCrono.innerHTML = this.t.toFixed(1); // Convierte el número a string con 1 decimal
+        }
+
+        Crono.prototype.arrancar = function () { this.idTimer = setInterval(this.mostrar.bind(this), 100); };
+
+        Crono.prototype.parar = function () { clearInterval(this.idTimer); this.idTimer = undefined; };
+
+        Crono.prototype.limpiarCrono = function () {
+            this.t = 0;
+            this.domCrono.innerHTML = this.t.toFixed(1) //"0.0";
+        }
+
+        Crono.prototype.cambiarCrono = function () {
+            if (!this.t) { this.arrancar(); }
+            else { this.parar(); }
+        }
+
+
+        //**************************************************************
+
+
+        function main() {
+            // instanciamos un crono, indicantdole los ids de
+            // el punto en que presentara la secuencia de números y 
+            // los dos botones que manejaran el cronómetro
+	  		var oCrono1 = new Crono("crono1", "btn_cambiar_1", "btn_inicializar_1");			 	
+		} //Fin de la función main()
+
+	  	document.addEventListener("DOMContentLoaded", main, false);	
+		// metodo de DOM nivel 2  que indica al agente de usuario que permanezca atento:
+		// evento: en este caso la carga completa de la página
+		// función a lanzar: en este caso main
+		// orden del flujo de eventos: false salta la fase de captura
+		// el equivalente del DOM nivel 1 sería
+		// window.onload = main
+
+  	</script>
+</head>
+<body>
+	<header>
+		<h1>Cronómetro</h1>
+	</header>	
+	<section class="container.fluid">
+		<div class="row">
+			<div class="col-md-4 col-md-offset-4">
+				<h2><span id="crono1">0.0</span> segundos </h2>
+			</div>
+		</div>
+
+		<div class="row">
+			<div class="col-md-4 col-md-offset-4">
+				<button id="btn_cambiar_1" type="button" class="btn btn-primary">arrancar/parar</button>
+				<button id="btn_inicializar_1" type="button" class="btn btn-primary">inicializar</button>
+			</div>
+		</div>
+		
+	</section>
+</body>

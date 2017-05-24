@@ -1,0 +1,64 @@
+﻿<!DOCTYPE html>
+
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml">
+    <head>
+        <meta charset="utf-8" />
+        <title>Ejercicio 6 cookies</title>
+    </head>
+    <body>
+        <button type="button" id="iniciar" value="iniciar">Iniciar</button>
+        <button type="button" id="vaciar" value="vaciar">Vaciar</button>
+        <button type="button" id="mostrar" value="mostrar">Mostrar</button>
+        <span id="contador">0</span>
+        <script type="text/javascript">
+            function setCookie( cvalue, exdays) {
+                var d = new Date();
+                d.setTime(d.getTime() + (exdays * 24 * 60 * 60 * 1000));
+                var expires = "expires=" + d.toUTCString();
+                document.cookie = "NUMERO DE VISITAS"+  "=" + cvalue + "; " + expires;
+            }
+
+            function getCookie() {
+                var name = "NUMERO DE VISITAS";
+                var ca = document.cookie.split(';');
+                for (var i = 0; i < ca.length; i++) {
+                    var c = ca[i];
+                    while (c.charAt(0) == ' ') c = c.substring(1);
+                    if (c.indexOf(name) == 0) return c.substring(name.length, c.length);
+                }
+                return "";
+            };
+
+            document.getElementById("iniciar").onclick = iniciarcont;
+            document.getElementById("vaciar").onclick = vaciarcont;
+            document.getElementById("mostrar").onclick = mostrarcont;
+            
+            var valor = parseInt(getCookie());
+          
+
+
+            function iniciarcont() {
+                valor = parseInt("1");
+                setCookie(valor, 100);
+
+            }
+            function vaciarcont() {
+                valor = 0;
+                setCookie(valor, -1);
+                
+            }
+            if (valor) {
+
+                valor = valor + 1;
+                setCookie(valor,100)
+            }
+            else {
+                valor = 0;
+            }
+            function mostrarcont() {
+                document.getElementById("contador").innerHTML='la pagina ha recibido'+ valor+ 'visitas';
+            }
+           /* document.write('<br />' + i);*/
+        </script>
+    </body>
+</html>

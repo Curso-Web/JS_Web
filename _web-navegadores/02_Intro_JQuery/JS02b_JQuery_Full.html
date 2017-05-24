@@ -1,0 +1,56 @@
+﻿<!DOCTYPE HTML>
+<html lang="es">
+
+<head>
+	<meta charset="UTF-8">
+	<title>JQuery en la Web - 002</title>
+	<meta name="description" content="Ejercicios del Curso Web">
+	<meta name="author" content="Alejandro">
+  	<link rel="shortcut icon" href="fav_icon.png">
+  	<link rel="stylesheet" href="default.css">
+	<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+	<script>
+
+		function btnEventClick() {
+  			alert("Pulsado el boton desde " + this.id);
+  		};
+
+		$(function () {
+		    // document.getElementById("btn_1").onclick = btnEventHandler;
+		    $('#btn_1').click(btnEventClick);
+			// document.getElementById("btn_1").addEventListener("click", btnEventListener, false);
+			$('#btn_2').on("click", btnEventClick);
+		}); // end ready
+	</script>  
+</head>
+
+ <body>
+  
+ 	<header>
+  		<h1>Página Web con un script</h1>
+	</header>
+
+	<article>
+		<div>
+            <button name="btn_1" id="btn_1">Pulsar</button>
+            <label for="btn_1">Boton "manejado" con JQuery</label>
+         </div>
+        <div>
+            <button name="btn_2" id="btn_2">Pulsar</button>
+            <label for="btn_2">Boton "escuchado" con JQuery</label>
+        </div>
+
+		<p id="result"></p>
+	</article>
+	
+	<footer>
+		<p>
+			&copy; Copyright  by Alejandro L. Cerezo
+		</p>
+	</footer>
+ </body>
+
+</html>
+ </body>
+
+</html>

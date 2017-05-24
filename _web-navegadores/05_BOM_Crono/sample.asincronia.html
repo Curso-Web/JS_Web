@@ -1,0 +1,47 @@
+﻿<!DOCTYPE HTML>
+<html lang="es">
+
+<head>
+	<meta charset="UTF-8">
+	<title>Hola Mundo - HTML_001</title>
+	<meta name="description" content="Ejercicios del Curso ASI">
+	<meta name="author" content="Alejandro">
+  	<link rel="shortcut icon" href="/favicon.ico">
+	<link rel="apple-touch-icon" href="/apple-touch-icon.png">
+  	<link rel="stylesheet" href="css/default_001.css">
+    <script>
+        window.onload = function (){
+            var p1 = document.getElementById("p1");
+            var p2 = document.getElementById("p2");
+            var i = 1;
+            setTimeout(function () {
+                do {
+                    p1.innerHTML = "Bucle infinito " + i;
+                    i++
+                } while (i < 10000)
+            }, 1);
+            for (var j = 0; j < 100000; j++)
+            {
+                p2.innerHTML = "Después del Bucle infinito " + j;
+            }            
+        }
+    </script>
+</head>
+
+ <body>
+  
+  	<header>
+  		<h1>Título</h1>
+	</header>
+	<article>
+		<p id="p1">Texto</p>
+        <p id="p2"></p>
+	</article>
+	<footer>
+		<p>
+			&copy; Copyright  by Alejandro L. Cerezo
+		</p>
+	</footer>
+ </body>
+
+</html>

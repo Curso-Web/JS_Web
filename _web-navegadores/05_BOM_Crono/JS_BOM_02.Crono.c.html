@@ -1,0 +1,76 @@
+﻿<!DOCTYPE HTML>
+<html lang="es">
+<head>
+	<meta charset="UTF-8">
+	<title>DOM - JavaScript_001</title>
+	<meta name="description" content="Ejercicios del Curso CMF">
+	<meta name="author" content="Alejandro">
+    <link rel="shortcut icon" href="fav_icon.png">
+  	<link href="../../../_bootstrap/css/bootstrap.min.css" rel="stylesheet">
+  	<link rel="stylesheet" href="default.css">
+  	<script type="text/javascript" href="../../../_bootstrap/js/bootstrap.js"></script>
+  	<script type="text/javascript">
+
+          // Se crea una función main que encapsula todo el código
+
+		function main () {
+		    var idTimer;
+		    var countTime = 0;
+
+		    document.getElementById("btn_cambiar").onclick = cambiarCrono;
+			document.getElementById("btn_inicializar").onclick = limpiarCrono;
+		 	
+			function mostrar() {
+			    countTime += 0.01;
+			    document.getElementById("crono").textContent = countTime.toFixed(2);
+			    // Convierte el número a string con 1 decimal
+			}
+
+			function arrancar() { idTimer = setInterval(mostrar, 10); };
+
+			function parar() { clearInterval(idTimer); idTimer = undefined; };
+
+			function limpiarCrono() {
+			    countTime = 0
+			    document.getElementById("crono").innerHTML = countTime.toFixed(2); //"0.00";
+			}
+
+            // Manejador de eventos del primer boton (Arrancar / Parar)
+			function cambiarCrono() {
+			    if (!idTimer) { arrancar(); }
+			    else { parar(); }
+
+			}
+		}
+
+
+	  	document.addEventListener("DOMContentLoaded", main, false);	
+		// metodo de DOM nivel 2  que indica al agente de usuario que permanezca atento:
+		// evento: en este caso la carga completa de la página
+		// función a lanzar: en este caso main
+		// orden del flujo de eventos: false salta la fase de captura
+		// el equivalente del DOM nivel 1 sería
+		// window.onload = main
+
+  	</script>
+</head>
+<body>
+	<header>
+		<h1>Cronómetro</h1>
+	</header>	
+	<section class="container.fluid">
+		<div class="row">
+			<div class="col-md-4 col-md-offset-4">
+				<h2><span id="crono">0.00</span> segundos </h2>
+			</div>
+		</div>
+
+		<div class="row">
+			<div class="col-md-4 col-md-offset-4">
+				<button id="btn_cambiar" type="button" class="btn btn-primary">arrancar/parar</button>
+				<button id="btn_inicializar" type="button" class="btn btn-primary">inicializar</button>
+			</div>
+		</div>
+
+	</section>
+</body>

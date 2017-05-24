@@ -1,0 +1,128 @@
+﻿<!DOCTYPE HTML>
+<html lang="es">
+<head>
+	<meta charset="UTF-8">
+	<title>DOM - JavaScript_001</title>
+	<meta name="description" content="Ejercicios del Curso CMF">
+	<meta name="author" content="Alejandro">
+    <link rel="shortcut icon" href="fav_icon.png">
+  	<link href="../../../_bootstrap/css/bootstrap.min.css" rel="stylesheet">
+  	<link rel="stylesheet" href="default.css">
+  	<script type="text/javascript" href="../../../_bootstrap/js/bootstrap.js"></script>
+  	<script type="text/javascript">
+
+  		// The .bind method from Prototype.js 
+  		// Se encorpora el método bind, en caso de que no esté implementado
+		if (!Function.prototype.bind) { // check if native implementation available
+		  Function.prototype.bind = function (){ 
+		  	'use strict';
+		    var fn = this, args = Array.prototype.slice.call(arguments),
+		        object = args.shift(); 
+		    return function(){ 
+		      return fn.apply(object, 
+		        args.concat(Array.prototype.slice.call(arguments))); 
+		    }; 
+		  };
+		}
+
+		// Tunción main del script
+	  	function main () {
+
+	  		//***************************************************************
+	  		// Se crea la "CLASE" Crono
+	  		//***************************************************************
+
+	  		// Definición de la Función Constructora de la Pseudoclase Crono
+
+	  		'use strict'; 
+	  		function Crono (posicion) {
+	  			this.t = 0;
+	  			this.posicion = posicion;
+
+		    	// Se añade el método mostrar al prototipo 
+		    	Crono.prototype.mostrar = function ()  { 
+		    		var oCrono = document.getElementById(this.posicion),
+		    			timeCrono = +oCrono.innerHTML + 0.1;
+		    		oCrono.innerHTML = timeCrono.toFixed(1); // Convierte el número a string con 1 decimal
+		    	};
+		    	
+		    	Crono.prototype.arrancar = function () { this.t = setInterval(this.mostrar.bind(this), 100); };
+		    	
+		    	Crono.prototype.parar = function ()  { clearInterval(this.t);  this.t = undefined; };
+
+		  		Crono.prototype.limpiarCrono = function () {
+		  			document.getElementById(this.posicion).innerHTML = "0.0";
+		  		};
+
+		  		Crono.prototype.cambiarCrono = function () {
+		  			if (!this.t) {this.arrancar();}
+		  			else {this.parar();}
+		  		
+		  		};
+
+	  		}
+
+
+			//**************************************************************
+
+		    // Se creean dos objetos de la "clase" Crono,
+		    // correspondientes a los elementos definidos en HTML
+
+			var oCrono1 = new Crono ("crono1"),
+			 	oCrono2 = new Crono ("crono2");
+
+			// Se definen como manejadores de los eventos
+			// los métodos de los correspondientes objetos 
+			// en lugar de una única función creada al margen de los objetos
+
+	 		document.getElementById("btn_cambiar_1").onclick = function () {oCrono1.cambiarCrono();};
+			document.getElementById("btn_inicializar_1").onclick = function () {oCrono1.limpiarCrono();};
+
+	 		document.getElementById("btn_cambiar_2").onclick = function () {oCrono2.cambiarCrono();};
+			document.getElementById("btn_inicializar_2").onclick = function () {oCrono2.limpiarCrono();};
+
+			 	
+		} //Fin de la función main()
+
+	  	document.addEventListener("DOMContentLoaded", main, false);	
+		// metodo de DOM nivel 2  que indica al agente de usuario que permanezca atento:
+		// evento: en este caso la carga completa de la página
+		// función a lanzar: en este caso main
+		// orden del flujo de eventos: false salta la fase de captura
+		// el equivalente del DOM nivel 1 sería
+		// window.onload = main
+
+  	</script>
+</head>
+<body>
+	<header>
+		<h1>Cronómetro</h1>
+	</header>	
+	<section class="container.fluid">
+		<div class="row">
+			<div class="col-md-4 col-md-offset-4">
+				<h2><span id="crono1">0.0</span> segundos </h2>
+			</div>
+		</div>
+
+		<div class="row">
+			<div class="col-md-4 col-md-offset-4">
+				<button id="btn_cambiar_1" type="button" class="btn btn-primary">arrancar/parar</button>
+				<button id="btn_inicializar_1" type="button" class="btn btn-primary">inicializar</button>
+			</div>
+		</div>
+		
+		<div class="row">
+			<div class="col-md-4 col-md-offset-4">
+				<h2><span id="crono2">0.0</span> segundos </h2>
+			</div>
+		</div>
+
+		<div class="row">
+			<div class="col-md-4 col-md-offset-4">
+				<button id="btn_cambiar_2" type="button" class="btn btn-primary">arrancar/parar</button>
+				<button id="btn_inicializar_2" type="button" class="btn btn-primary">inicializar</button>
+			</div>
+		</div>
+	</section>
+</body>

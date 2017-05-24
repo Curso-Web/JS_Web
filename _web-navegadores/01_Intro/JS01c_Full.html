@@ -1,0 +1,65 @@
+﻿<!DOCTYPE HTML>
+<html lang="es">
+
+<head>
+	<meta charset="UTF-8">
+	<title>JavaScript en la Web - 001</title>
+	<meta name="description" content="Ejercicios del Curso Web">
+	<meta name="author" content="Alejandro">
+  	<link rel="shortcut icon" href="fav_icon.png">
+  	<link rel="stylesheet" href="default.css">
+    <style>
+        div { width: 60%;
+              margin: 2em auto;
+        }
+        footer {
+            margin-top: 4em;
+            border-top: solid 1px;
+            }
+    </style>
+  	<script type="text/javascript">
+  		function btnEventClick () {
+  			alert("Pulsado el boton");
+  		};
+
+  		function main() {
+  		    document.getElementById("btn_1").onclick = btnEventClick;
+  			document.getElementById("btn_2").addEventListener("click", btnEventClick, false);
+  		}
+
+  		(function () {
+  		    //document.addEventListener("DOMContentLoaded", inicioScript, false);
+  		    window.addEventListener("load", main, false);
+  		    //metodo de DOM nivel 2  que indica al agente de usuario que permanezca atento:
+  		    // evento: en este caso la carga completa de la página
+  		    // función a lanzar: en este caso iniciaBoton
+  		    // orden del flujo de eventos: false salta la fase de captura
+  		})();
+
+  	</script>
+</head>
+
+ <body>
+  
+  	<header>
+  		<h1>Página Web con un script</h1>
+	</header>
+	<article>
+		<div>
+            <button name="btn_1" id="btn_1">Pulsar</button>
+            <label for="btn1">Boton asociado a un "Event Handler"</label>
+        </div>
+        <div>
+            <button name="btn_2" id="btn_2">Pulsar</button> 
+            <label for="btn_2 ">Boton asociado a un "Event Listener"</label>        
+        </div>
+		<p id="result"></p>
+	</article>
+	<footer>
+		<p>
+			&copy; Copyright  by Alejandro L. Cerezo
+		</p>
+	</footer>
+ </body>
+
+</html>
