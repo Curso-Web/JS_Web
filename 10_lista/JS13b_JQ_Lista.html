@@ -1,0 +1,48 @@
+﻿<!DOCTYPE HTML>
+<html lang="es">
+
+<head>
+	<meta charset="UTF-8">
+	<title>DOM Lista - JavaScript_001</title>
+	<meta name="description" content="Ejercicios del Curso CMF">
+	<meta name="author" content="Alejandro">
+  	<link rel="shortcut icon" href="/favicon.ico">
+	<link rel="apple-touch-icon" href="/apple-touch-icon.png">
+  	<link rel="stylesheet" href="css/javascript_001.css">
+</head>
+
+ <body>
+ 
+  	<header>
+	  	<h1>Lista</h1>
+	</header>
+	<article>
+  		<p>Puedes añadir los elementos que quieras</p>
+		<input type="text" name="item" id ="item" value=""
+		placeholder="Introduce un nuevo valor">        
+		<ul id="lista"></ul>
+		<input type="button" value="Añadir elemento" id="addBtn">
+	</article>
+	<footer>
+		<p>
+			&copy; Copyright  by Alejandro L. Cerezo
+		</p>
+	</footer>
+
+
+        <div class ="clase1"></div>
+        <div class ="clase1"></div>
+        <div class ="clase1"></div>
+
+
+		<script>
+        	$('.clase1').each(function() {
+				$(this).a().f()
+			})
+			
+		</script>
+
+	<script src="../node_modules/jquery/dist/jquery.js"></script>
+	<script src="js/main.js"></script>
+ </body>
+</html>

@@ -1,0 +1,227 @@
+﻿<!DOCTYPE HTML>
+<html lang="es">
+<head>
+	<meta charset="UTF-8">
+	<title>DOM - JavaScript_001</title>
+	<meta name="description" content="Ejercicios del Curso CMF">
+	<meta name="author" content="Alejandro">
+    <link rel="shortcut icon" href="fav_icon.png">
+	<link rel="apple-touch-icon" href="/apple-touch-icon.png">
+  	<link rel="stylesheet" href="css/javascript_001.css">
+  	<style>
+  		div {
+  			width: 12%;
+  			margin: 0px 4%;
+  			position: fixed;
+  			top: 80px;
+  			background-color: rgba(200,200,200,0.5);
+  			border-radius: 20px;
+  		}
+  		div h4 {text-align: center}
+  		div a:visited {color:#0000FF}
+  		article{
+  			margin-left: 20%;
+  		}
+  		span.verObjetos{
+  			color:red;
+  			cursor: hand;
+  			text-decoration: underline;
+  		}
+  		
+  	</style>
+  	<script>
+	//<!--
+	function ImprimirCollection(o) {
+		var salida = '';
+		for (var p in o) {
+			salida += p + ': ' + o[p] + '\n';
+		}
+		alert(salida);
+		console.dir(o);
+	}
+	// -->
+	</script>
+</head>
+<body>
+ <!--body  onload="alert('Página cargada - OK');"-->
+ 
+  	<header>
+  	<h1>Sencilla pagina para comprobar el DOM
+    </h1>
+	</header>
+  	<aside>
+  		<noscript>
+   	 		<p>
+     			<em>Si lees este mensaje es que tu navegador no 
+					ejecuta guiones JavaScript</em>
+    		</p>
+  		</noscript>
+	</aside>
+	<div>
+		<h4>Talk to me:</h4>
+		<ul>
+			<li id="twitter" class="sprite">
+				<a href="http://www.twitter.com">Twitter</a>
+			</li>
+			<li id="facebook" class="sprite">
+				<a href="http://www.facebook.com">Facebook</a>
+			</li>
+			<li id="flickr" class="sprite">
+				<a href="http://www.flickr.com">Flickr</a>
+			</li>
+			<li id="linkedin" class="sprite">
+				<a href="http://www.linkedin.com">LinkedIn</a>
+			</li>
+		</ul>
+	</div>
+	<article>
+   		<h3>Información sobre el nodo superior: document</h3>
+   		<p>Si escribimos <code>document;</code><br>
+   		nos devuelve <code><script>document.write(document);</script></code>
+   		[Como se trata de un objeto, <span class="verObjetos" onclick = "ImprimirCollection(document)">
+   			pulsa aqui</span> si quieres verlo]	;
+   		
+		</p>	
+   		<p>Si escribimos <code>document.nodeType;</code><br>
+   		nos devuelve <code><script>document.write(document.nodeType);</script></code><br>
+   		lo que indica que se trata de un nodo de tipo Document
+		</p>	
+   		<p>Si escribimos <code>document.nodeName;</code><br>
+   		nos devuelve <code><script>document.write(document.nodeName);</script></code>
+		</p>	
+   		<p>Si escribimos <code>document.nodeValue;</code><br>
+   		nos devuelve <code><script>document.write(document.nodeValue);</script></code>
+		</p>	
+
+ 		<h3>Información sobre los nodos descencientes (hijos)</h3>
+   		<p>Si escribimos <code>document.childNodes;</code><br>
+   		nos devuelve <code><script>document.write(document.childNodes);</script></code>
+   		[Como se trata de un objeto, <span class="verObjetos" onclick = "ImprimirCollection(document.childNodes)">
+   			pulsa aqui</span> si quieres verlo];<br />
+   		El contenido del objeto corresponde a los nodos hijos (que en caso de document SÓLO pueden ser estos DOS)
+   		    <ol>
+   			    <li>[object DocumentType]</li>	
+   			    <li>[object HTMLHtmlElement</li>
+   		    </ol>	
+		</p>
+        <p>Si escribimos <code>document.children;</code><br>
+        nos devuelve <code><script>document.write(document.children);</script></code>
+        [Como se trata de un objeto, <span class="verObjetos" onclick="ImprimirCollection(document.children)">
+        pulsa aqui </span> si quieres verlo];<br />
+        El contenido del objeto corresponde a los nodos hijos tipo Element (que en caso de document SÓLO puede ser UNO)
+            <ol>
+                <li>[object HTMLHtmlElement</li>
+            </ol>
+        </p>
+
+
+		<p>Podemos acceder a los datos indicando la posición del array y el atributo nodeName<br>
+   		Si escribimos <code>document.childNodes[1].nodeName;</code><br>
+   		nos devuelve <code><script>document.write(document.childNodes[1].nodeName);</script></code>
+		</p>
+        E igualmente si escribimos <code>document.children[0].nodeName;</code><br>
+        nos devuelve el mismo valor, <code>
+        <script>document.write(document.children[0].nodeName);</script></code>
+	
+		<p>O podemos hacer lo mismo utilizando el método item<br>
+		Si escribimos <code>document.childNodes[0];</code><br>
+   		nos devuelve <code><script>document.write(document.childNodes[0]);</script></code>
+   		[<span class="verObjetos" onclick = "ImprimirCollection(document.childNodes[0])">acceder al objeto</span>]<br>   		
+		Si escribimos <code>document.childNodes[1];</code><br>
+   		nos devuelve <code><script>document.write(document.childNodes[1]);</script></code>
+   		[<span class="verObjetos" onclick = "ImprimirCollection(document.childNodes[1])">acceder al objeto</span>]
+		</p>
+
+		<p>Accedemos ahora al nodo [1] de document, htlm<br>
+   		Si escribimos <code>document.childNodes[1].childNodes;</code><br>
+   		nos devuelve <code><script>document.write(document.childNodes[1].childNodes);</script></code>
+   		[Como se trata de un objeto, <span class="verObjetos" onclick = "ImprimirCollection(document.childNodes[1].childNodes)">
+   			pulsa aqui</span> si quieres verlo];<br />
+		Vemos que el nodo [2] corresponde a body<br />
+		Si escribimos <code>document.childNodes[1].childNodes[2].nodeName;</code><br>
+   		nos devuelve <code><script>document.write(document.childNodes[1].childNodes[2].nodeName);</script></code>
+
+		<p>Siguiendo el prodeso, vemos al nodo [2] de document.htlm, es decir body<br>
+   		Si escribimos <code>document.childNodes[1].childNodes[2].childNodes;</code><br>
+   		nos devuelve <code><script>document.write(document.childNodes[1].childNodes[2].childNodes);</script></code>
+   		[Como se trata de un objeto, <span class="verObjetos" onclick = "ImprimirCollection(document.childNodes[1].childNodes[2].childNodes)">
+   			pulsa aqui</span> si quieres verlo];<br />
+		Vemos que el nodo [7] corresponde a Div<br />
+		Si escribimos <code>document.childNodes[1].childNodes[2].childNodes[7].nodeName</code><br>
+   		nos devuelve <code><script>document.write(document.childNodes[1].childNodes[2].childNodes[7].nodeName);</script></code></p>
+
+		<h3>Algunos shortcut members del nodo document:</h3>
+		<p> &lt;body&gt;, &lt;html&gt;, and window</p>
+   		<p>Si escribimos <code>document.body.nodeName;</code><br>
+   		nos devuelve <code><script>document.write(document.body.nodeName);</script></code>
+		</p>	
+   		<p>Si escribimos <code>document.documentElement.nodeName;</code><br>
+   		nos devuelve <code><script>document.write(document.documentElement.nodeName);</script></code>
+		</p>
+		<p>Si escribimos <code>var yogurt = "Brown Cow";</code><br>
+   		<script> var yogurt = "Brown Cow";</script>	
+   		y escribimos <code>document.defaultView.yogurt;</code><br>
+   		nos devuelve <code><script>document.write(document.defaultView.yogurt);</script></code><br>
+		o si escribimos <code>window.yogurt;</code><br>
+   		nos devuelve <code><script>document.write(window.yogurt);</script></code>
+		</p>
+		
+		<h3>Cambiando un texto</h3>
+		<p>Si seguimos descendiendo la estructura del DOM, tendremos lo siguiente
+ 		<ul>
+ 			<li>document</li>
+ 			<li>childNodes[1] : html</li>
+ 			<li>childNodes[2] : body</li>
+			<li>childNodes[7] : div</li>
+			<li>childNodes[3] : ul</li>
+			<li>childNodes[5] : li</li>
+			<li>childNodes[1] : a</li>
+ 		</ul>	
+  		<p>Si escribimos <code>document.childNodes[1].childNodes[2].childNodes[7].childNodes[3].childNodes[5].childNodes[1].childNodes[0].nodeValue;</code><br>
+   		nos devuelve <code><script>document.write(document.childNodes[1]. // <html> 
+												childNodes[2]. // <body> 
+												childNodes[7]. // <div>
+												childNodes[3]. // ul
+												childNodes[5]. // li
+												childNodes[1].// <a>
+												childNodes[0].
+												nodeValue);</script></code>
+
+  		</p>	
+   	
+		Como podemos aceder al elemento del objeto, podemos cambiarlo <span class="verObjetos" onclick = "CambiarObjeto(document)">
+   			pulsando aqui</span> ]	
+
+ 		<script>
+ 		function CambiarObjeto(document)
+ 		{
+			document.
+			childNodes[1]. // <html> 
+			childNodes[2]. // <body> 
+			childNodes[7]. // <div>
+			childNodes[3]. // ul
+			childNodes[5]. // li
+			childNodes[1].// <a>
+			childNodes[0].
+			data = "Flickr (Fotos)";
+			
+ 		}
+   			//<!--
+//  			document.write("<h3>");
+//				document.write("Información sobre un nodo");
+//  			document.write("</h3>");
+//   			document.write("<p>");
+//				document.write("Si escribimos <code>document</code>");
+//   			document.write("<br>");
+//				document.write("Nos devuelve " + document);
+			//-->
+        </script>
+
+	</article>
+	<footer>
+		<p>
+			&copy; Copyright  by Alejandro L. Cerezo
+		</p>
+	</footer>
+</body>
+</html>

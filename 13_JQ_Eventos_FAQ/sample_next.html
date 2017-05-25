@@ -1,0 +1,41 @@
+﻿<!DOCTYPE HTML>
+<html lang="es">
+
+<head>
+	<meta charset="UTF-8">
+	<title>Método next</title>
+	<meta name="description" content="Ejercicios del Curso ASI">
+	<meta name="author" content="Alejandro">
+  	<link rel="shortcut icon" href="/favicon.ico">
+  	<link rel="stylesheet" href="css/default_001.css">
+	<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.6.3/jquery.min.js"></script>
+	<script>
+		$(function() {
+		    $("li.tercero").click(function () {
+		        $(this).next().css("background-color", "red");
+		    }); // Fin del click()
+		}); // Fin del ready()
+	</script>  
+</head>
+
+ <body>
+  
+  	<header>
+  		<h1>Prueba del método next() en JQuery</h1>
+	</header>
+	<article>
+		<ul>
+  			<li>list item 1</li>
+  			<li>list item 2</li>
+  			<li class="tercero">list item 3</li>
+  			<li>list item 4</li>
+  			<li>list item 5</li>
+		</ul>
+	</article>
+	<footer>
+		<hr>
+		<p>by Alejandro L. Cerezo <br> alce65@hotmail.es</p>
+	</footer>
+ </body>
+
+</html>

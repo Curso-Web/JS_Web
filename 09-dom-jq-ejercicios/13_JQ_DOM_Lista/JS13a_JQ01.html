@@ -1,0 +1,36 @@
+﻿<!DOCTYPE HTML>
+<html lang="es">
+
+<head>
+	<meta charset="UTF-8">
+	<title>Hola Mundo - HTML_001</title>
+	<meta name="description" content="Ejercicios del Curso ASI">
+	<meta name="author" content="Alejandro">
+  	<link rel="shortcut icon" href="fav_icon.png">
+  	<link rel="stylesheet" href="default_001.css">
+    <style>
+        strong {display:inline-block;}
+    </style>
+	<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
+	<script>
+		$(function() {
+			var cTitle = "Prueba de JQuery";
+			var cSaludo = "Hola ";
+			var cFooter = "by Alejandro L. Cerezo // alcerezo@movistar.es";
+			$('h1').text(cTitle);
+			$('#saludo').text(cSaludo);
+			$('footer p').text(cFooter).before("<hr>");
+			$('p strong')
+				.width(300)
+				.height(100)			
+				.append(prompt("Escribe tu nombre"))
+				.fadeIn(1000);
+		});
+	</script>  
+</head>
+ <body>
+  	<header><h1></h1></header>
+	<article><p><span id="saludo"></span><strong></strong></p></article>
+	<footer><p></p></footer>
+ </body>
+</html>

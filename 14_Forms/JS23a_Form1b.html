@@ -1,0 +1,119 @@
+﻿<!DOCTYPE HTML>
+<html lang="es">
+
+<head>
+	<meta charset="UTF-8">
+	<title>Formulario - JavaScript</title>
+	<meta name="description" content="Ejercicios del Curso CMF">
+	<meta name="author" content="Alejandro">
+  	<link rel="shortcut icon" href="fav_icon.png">
+	<link rel="apple-touch-icon" href="/apple-touch-icon.png">
+  	<link rel="stylesheet" href="css/javascript_001.css">
+    <style>
+        ul {list-style-type:none;}
+    </style>
+  	<script>
+	//<!--
+	
+	function recogeDatos () {
+		var aSalida = [
+		"<li>Nombre: <strong>" + document.getElementById("fname").value + "</strong>" + "</li>",
+		"<li>Apellidos: <strong>" + document.getElementById("apell").value + "</strong>" + "</li>",
+		"<li>Dirección: <strong>" + document.getElementById("address").value + "</strong>" + "</li>",
+		"<li>Ciudad: <strong>" + document.getElementById("city").value + "</strong>" + "</li>",
+		"<li>Comentarios: <strong>" + document.getElementById("coment").value + "</strong>" + "</li>",
+		]
+ 
+		//llamada a la función que procesara el arry presentandolo en pantalla
+		escribeDatos (aSalida);
+		return false;
+	}
+	
+
+	function escribeDatos (aDatos) {
+		//ocultar formulario
+		document.getElementById("form_1").style.display = "none";
+		//mostrar bloque div para el resultado
+		document.getElementById("resultado").style.display = "block";
+		// referencia del párrafo donde escribir
+		oParrafo = document.getElementById("parrafo_1");
+		//incorporamos al parrafo cada línea del array		
+	  	for (var i=0; i < aDatos.length; i++) {
+			oParrafo.innerHTML += aDatos[i];
+	  	};
+	}	
+
+	function iniciaBoton () {
+		document.getElementById("submit").onclick = recogeDatos;
+	}
+	
+
+
+    document.addEventListener("DOMContentLoaded", iniciaBoton, false);	
+	//metodo de DOM nivel 2  que indica al agente de usuario que permanezca atento:
+	// evento: en este caso la carga completa de la página
+	// función a lanzar: en este caso iniciaBoton
+	// orden del flujo de eventos: false salta la fase de captura
+	 // equivale a  window.onload = iniciaBoton; 	
+	 
+	</script>
+</head>
+
+ <body>
+ <!--body  onload="alert('Página cargada - OK');"-->
+ 
+ 
+  	<header>
+  	<h1 title="Formulario 1">
+  		Inscripción como docente (Tajamar)
+    </h1>
+	</header>
+  	<aside>
+  		<noscript>
+   	 		<p>
+     			<em>Si lees este mensaje es que tu navegador no 
+					ejecuta guiones JavaScript</em>
+    		</p>
+  		</noscript>
+	</aside>
+	<article>
+		
+
+
+
+ 		<form name ="form_1" id="form_1" method="post" action="mailto:alcerezo@microforum.es" enctype="text/plain">
+ 		  	<fieldset><legend>Datos personales</legend>
+		  	<p><label for="fname">Nombre:</label>
+ 		  		<input type="text" id="fname" name="fname" size="30" placeholder="Escriba su nombre"></p>
+	      	<p><label for="apell">Apellido:</label>
+	      		<input type="text" id="apell" name="apell" size="30" maxlength="100" placeholder="Escriba sus apellidos"></p>      
+	      	<p><label for="address">Domicilio:</label>
+	      		<input type="text" id="address" name="address" size="30"maxlength="200" placeholder="Escriba su dirección"></p>
+	    	<p><label for="city">Ciudad:</label>
+	    		<input type="text" id="city" name="city" placeholder="Escriba su ciudad"></p> 
+			<p><label for="coment">Comentarios:</label>
+				<textarea id="coment" name="coment" placeholder="Escriba los comentarios que consideres oprtunos"> </textarea></p>
+			</fieldset>	
+			<fieldset>
+			<p><input id="submit" type="submit" value="Aceptar"> &nbsp; 
+				<input id="reset" type="reset" value="Borrar"></p>
+			</fieldset>
+		</form>
+
+		<div id="resultado" style="display: none">
+			<h2>Los datos del usuario son los siguientes</h2>			
+		<ul id="parrafo_1"> </ul>
+		</div>	
+
+	</article>
+	<footer>
+		<p>
+			&copy; Copyright  by  Alejandro L. Cerezo
+		</p>
+		<p>
+			<a href="mailto:alcerezo@microforum.es">alcerezo@micorforum.es</a>
+		</p>
+	</footer>
+ </body>
+
+</html>

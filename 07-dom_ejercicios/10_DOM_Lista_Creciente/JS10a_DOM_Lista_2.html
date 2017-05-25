@@ -1,0 +1,75 @@
+﻿<!DOCTYPE HTML>
+<html lang="es">
+
+<head>
+	<meta charset="UTF-8">
+	<title>DOM Lista - JavaScript_001</title>
+	<meta name="description" content="Ejercicios del Curso CMF">
+	<meta name="author" content="Alejandro">
+  	<link rel="shortcut icon" href="/favicon.ico">
+	<link rel="apple-touch-icon" href="/apple-touch-icon.png">
+  	<link rel="stylesheet" href="css/javascript_001.css">
+  	<script>
+	function main () {
+
+		function add() {
+			var nuevoElemento = prompt('Introduce un nuevo valor','');
+			var elemento = document.createElement("li");
+			var texto = document.createTextNode(nuevoElemento);
+			elemento.appendChild(texto);
+			var lista = document.getElementById("lista");
+			lista.appendChild(elemento);
+		}
+
+		function addSimple() {
+			var nuevoElemento = prompt('Introduce un nuevo valor','');
+			lista = document.querySelector("#lista li:first-child");
+			nuevoElemento = "<li>" + nuevoElemento+ "</li>";
+			lista.innerHTML += nuevoElemento;
+		}	
+		document.getElementById("addBtn").addEventListener("click",addSimple,false);
+	}
+	document.addEventListener("DOMContentLoaded",main,false) 
+	</script>
+</head>
+
+ <body>
+ <!--body  onload="alert('Página cargada - OK');"-->
+ 
+  	<header>
+  	<h1>Lista
+    </h1>
+	</header>
+  	<aside>
+  		<noscript>
+   	 		<p>
+     			<em>Si lees este mensaje es que tu navegador no 
+					ejecuta guiones JavaScript</em>
+    		</p>
+  		</noscript>
+	</aside>
+	<article>
+ 		<script>
+   			//<!--
+			document.write("Puedes añadir los elementos que quieras");
+			//-->
+        </script>
+        
+        <ul id="lista">
+			<li>Perro</li>
+			<li>Gato</li>
+			<li>Oso</li>
+			<li>Leon</li>
+			<li>Tigre</li>
+		</ul>
+		<input type="button" value="Añadir elemento" id="addBtn">
+
+	</article>
+	<footer>
+		<p>
+			&copy; Copyright  by Alejandro L. Cerezo
+		</p>
+	</footer>
+ </body>
+
+</html>

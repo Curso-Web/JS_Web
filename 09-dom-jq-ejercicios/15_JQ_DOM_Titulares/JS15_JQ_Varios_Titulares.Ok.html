@@ -1,0 +1,72 @@
+﻿<!DOCTYPE HTML>
+<html lang="es">
+
+<head>
+	<meta charset="UTF-8">
+	<title>Varios titulares</title>
+	<meta name="description" content="Ejercicios del Curso ASI">
+	<meta name="author" content="Alejandro">
+    <link rel="shortcut icon" href="fav_icon.png">
+  	<link rel="stylesheet" href="css/default_001.css">
+  	<style>
+  		body {width:90%}
+  		header, article, footer {
+  			margin:  auto 6%;
+  		}
+  		hr, footer p {clear: both}
+		.pullquote {
+			float: right;
+			clear: right;
+			width: 30%;
+			min-width: 200px;
+			border: 1px solid black;
+			padding: 10px;
+			font-size: 20px;
+			background-color:rgb(195,151,51);
+			margin: 20px 0 10px 10px;
+			font-style: italic;
+			color: rgb(255,255,255);
+		}
+</style>
+	<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
+	<script>
+		$(function() {
+			  $('span.pq').each(function () {
+			  	var quote=$(this).clone().removeClass('pq').addClass('pullquote');
+			    $(this).before(quote); 
+			  }) 
+		});
+	</script>  
+</head>
+
+ <body>
+  
+  	<header>
+  		<h1>Titular en JQuery</h1>
+	</header>
+	<article>
+		<h2>DARPA en los años 60</h2>
+		<p>Con la creación del primer módem en 1958, la compañía BELL inaugura la transmisión de datos binarios sobre una línea telefónica simple, permitiendo que una  computadora central o unidad principal, pueda conectarse a sus terminales a través de largas líneas alquiladas. Este método fue utilizado en el Proyecto RAND, permitiendo la colaboración entre Herbert Simon, en Pittsburgh (Pensilvania) e investigadores de Santa Mónica (California) , en un trabajo sobre demostración automática de teoremas e inteligencia artificial. Poco después <span class="pq">aparece la primera descripción documentada acerca de las interacciones sociales</span> que podrían propiciarse como consecuencia de esta forma de trabajo en red (networking. En una serie de memorándums escritos por J.C.R. Licklider, del Massachusetts Institute of Technology, entre 1960 y 1962, el autor expone su concepto de Galactic Network, refiriéndose a una red interconectada globalmente a través de la que cada uno pudiera acceder desde cualquier lugar a datos y programas, un concepto que, en esencia, era muy parecido a la Internet actual.</p>
+		<p>En octubre de 1962, Licklider fue nombrado jefe de la Oficina de Técnicas de Procesamiento de Información (IPTO, Information Processing Techniques Office) de DARPA (Defense Advanced Research Projects Agency: Agencia de Investigación de Proyectos Avanzados de Defensa), una agencia del Departamento de Defensa de Estados Unidos responsable del desarrollo de nuevas tecnologías para uso militar. Licklider impulso un grupo informal sobre investigación en ordenadores, convenciendo a sus sucesores Ivan Sutherland, Bob Taylor, y el investigador del MIT Lawrence G. Roberts de la importancia del concepto de trabajo en red. <p>
+	</article>
+	    <article>
+		<h2>Evolución</h2>
+		<p>ARPA firmó tres contratos con Stanford (Cerf), BBN (Ray Tomlinson) y UCL (Peter Kirstein) para implementar TCP/IP (en el artículo de Cerf y Kahn se llamaba simplemente TCP, pero contenía ambos componentes). El equipo de Stanford, liderado por Cerf, produjo la especificación detallada y, en un año aproximadamente, se realizaron tres implementaciones independientes de TCP que podían interoperar.</p>
+		<p>Este<span class="pq">fue el principio de una experimentación y desarrollo a largo plazo para perfeccionar y madurar los conceptos y la tecnología de Internet</span>Empezando con las tres primeras redes (ARPANET, red de radiopaquetes y red satélite de paquetes) y sus primeras comunidades de investigación, el entorno experimental incorpora ya prácticamente cualquier forma de red y una comunidad de investigación y desarrollo con una base muy amplia. Con cada expansión se han presentado nuevos desafíos.</p>
+		<p>Las primeras implementaciones de TCP se hicieron con grandes sistemas de tiempo compartido como Tenex y TOPS 20. Cuando aparecieron los ordenadores de sobremesa por primera vez, algunos pensaron que TCP era demasiado grande y complejo para ejecutarse en un ordenador personal. David Clark y su grupo de investigación del MIT se propusieron demostrar que se podía hacer una implementación compacta y sencilla de TCP. Produjeron una implementación, primero para el Xerox Alto (la primera estación de trabajo personal desarrollada por Xerox PARC) y después para el IBM PC. La implementación era completamente interoperable con otros TCP, pero se adaptó al conjunto de aplicaciones y los objetivos de rendimiento de los ordenadores personales, y demostró que las estaciones de trabajo, además de grandes sistemas de tiempo compartido, podían ser parte de Internet. En 1976, Kleinrock publicó el primer libro sobre ARPANET. Destacaba la complejidad de los protocolos y las dificultades que a menudo introducían. Este libro fue influyente a la hora de difundir el conocimiento sobre las redes de conmutación de paquetes entre una comunidad muy amplia. <p>
+	</article>
+
+<!--  Estructura para añadir artículos
+    <article>
+		<h2></h2>
+		<p><span class="pq"></span> </p>
+		<p> <p>
+	</article>
+ -->	
+	<footer>
+		<hr>
+		<p class="final">by Alejandro L. Cerezo <br> alce65@hotmail.es</p>
+	</footer>
+ </body>
+
+</html>

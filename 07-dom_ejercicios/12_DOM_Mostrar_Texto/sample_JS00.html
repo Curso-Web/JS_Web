@@ -1,0 +1,47 @@
+﻿<!DOCTYPE HTML>
+<html lang="es">
+
+<head>
+	<meta charset="UTF-8">
+	<title>DOM - JS</title>
+	<meta name="description" content="Ejercicios del Curso ASI">
+	<meta name="author" content="Alejandro">
+  	<link rel="shortcut icon" href="fav_icon.png">
+    <link rel="stylesheet" href="javascript_001.css">
+</head>
+
+ <body>
+  
+  	<header>
+  		<h1>El DOM</h1>
+	</header>
+	<article>
+		<p class="clase_1" title="Parrafo 1">Esto es un parrafo que forma parte de un article</p>
+	</article>
+     <section>
+         <h2>Instrucciones a probar</h2>
+         <p>La página ejecuta var p1=document.getElementsByClassName("clase_1")[0]</p>
+         <script>
+             var p1 = document.getElementsByClassName("clase_1")[0];
+         </script>
+         <ul>
+             <li>p1.getAttribute("class")</li>
+             <li>p1.getAttribute("title")</li>
+             <hr>
+             <li>p1.attributes</li>
+             <li>p1.attributes[0]</li>
+             <li>p1.attributes[1]</li>
+             <hr>
+             <li>p1.className</li>
+             <li>p1.title</li>
+
+         </ul>
+     </section>
+	<footer>
+		<p>
+			&copy; Copyright  by Alejandro L. Cerezo
+		</p>
+	</footer>
+ </body>
+
+</html>

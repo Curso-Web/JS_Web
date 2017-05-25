@@ -1,0 +1,115 @@
+﻿<!DOCTYPE HTML>
+<html lang="es">
+
+<head>
+	<meta charset="UTF-8">
+	<title>DOM - JavaScript_002</title>
+	<meta name="description" content="Ejercicios del Curso CMF">
+	<meta name="author" content="Alejandro">
+    <link rel="shortcut icon" href="fav_icon.png">
+	<link rel="apple-touch-icon" href="/apple-touch-icon.png">
+  	<link rel="stylesheet" href="css/javascript_001.css">
+  	<style>
+  		div {
+  			width: 30%;
+  			margin: 0px 4%;
+  			background-color: rgba(200,200,200,0.5);
+  			border-radius: 20px;
+  			color:red;
+  			cursor: hand;
+  			text-decoration: underline;
+  			text-align: center;
+  		}
+  		p#final {background-color: rgba(220,220,200,0.5);
+  				width:60%;
+  				}
+  		article{
+  			margin-left: 10%;
+  		}
+  		span.verObjetos{
+  			
+  		}
+  		
+  	</style>
+  	<script>
+	//<!--
+	// -->
+	</script>
+</head>
+
+ <body>
+ <!--body  onload="alert('Página cargada - OK');"-->
+ 
+  	<header>
+  	<h1>Página HTML para manipular el DOM</h1>
+	</header>
+  	<aside>
+  		<noscript>
+   	 		<p>
+     			<em>Si lees este mensaje es que tu navegador no 
+					ejecuta guiones JavaScript</em>
+    		</p>
+  		</noscript>
+	</aside>
+	<article>
+		<!--
+			 Párrafo 1. getElementsByTagName("elemento")
+		-->
+		<p><strong>Aqui</strong> comienza un parrafo que podemos manipular facilmente usando<br />
+		<br /><code>parrafos = document.getElementsByTagName("p");<br />
+		alert (parrafos[0])<br /></code><br />
+		Si tienes firebug, veras en la consola que se ha creado un <em>HTMLCollection[p, p, p]</em><br>
+		al que puedes acceder directamente o desde la pestaña DOM-window<br>
+		para ccomprobar el contenido recogido en el array especial de objetos (parrafos)<br /> 
+		<br /><code>alert(parrafos[0].textContent)<br /></code><br />
+        Ahora desde la consola puedes cambiar completamente este parrafo<br />
+		</p>
+		<!--
+			 Párrafo 2 (y 3). getElementsByName("name")
+		-->
+		<p name="especial"><strong>Aqui</strong> tenemos un segundo parrafo en el que el atributo name 
+		toma el valor de "especial"<br />
+		Es un atributo invisible que normalmente se incluye en los items de un formulario,<br />
+		pero tambien se puede usar con parrafos, como hemos hecho aqui.<br />
+		Para manipular este parraso podemos usar<br />	
+		<br /><code>parrafoEspecial = document.getElementsByName("especial")<br>
+		alert (parrafoEspecial)<br /></code><br />
+		Si tienes firebug, veras en la consola que se ha creado un <em>NodeList[p]</em><br>
+		al que puedes acceder directamente o desde la pestaña DOM-window<br>
+		para ccomprobar el contenido recogido en el objeto de tipo NodeList<br>
+		<br /><code>alert(parrafoEspecial[0].textContent)<br /></code><br />
+        Ahora desde la consola puedes cambiar completamente este parrafo<br />
+		</p>
+		<p name="especial"><strong>Aqui</strong> tenemos otro parrafo "especial"</p>
+		<!--
+			 Párrafo 4. getElementById("id")
+		-->
+		<p id="final"><strong>Aqui</strong> tenemos un último parrafo, y en este caso es el atributo id
+		el que va a tomar el valor de "final"<br />	
+		Para manipular este parraso podemos usar<br />
+		<br /><code>parrafoFinal = document.getElementById("final")<br>
+		alert (parrafoFinal)<br></code><br />
+		Si tienes firebug, veras que en la consola aparece directament el <em>Nodo[p]</em> en cuestión<br>
+		al que puedes acceder directamente o desde la pestaña DOM-window<br>
+		para ccomprobar el contenido recogido en el objeto de tipo Nodo<br>
+		<br /><code>alert(parrafoFinal.textContent)<br /></code><br />
+        Ahora desde la consola puedes cambiar completamente este parrafo<br />
+		</p>	
+		<div onclick="document.getElementById('final').textContent = ' '">
+			Pulsa para ocultar parrafo</div>
+ 		<script>
+   			//<!-- Podría usarse támbién la siguiente función (que en este caso no se usa)
+			function ocultaFinal() {
+				document.getElementById('final').textContent = ' ';
+			}
+			//-->
+        </script>
+	</article>
+	<footer>
+		<p>
+			&copy; Copyright  by Alejandro L. Cerezo
+		</p>
+	</footer>
+ </body>
+
+</html>

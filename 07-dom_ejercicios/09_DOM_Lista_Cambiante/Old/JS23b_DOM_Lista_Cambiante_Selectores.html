@@ -1,0 +1,70 @@
+﻿<!DOCTYPE HTML>
+<html lang="es">
+
+<head>
+	<meta charset="UTF-8">
+	<title>DOM - JavaScript_001</title>
+	<meta name="description" content="Ejercicios del Curso CMF">
+	<meta name="author" content="Alejandro">
+    <link rel="shortcut icon" href="fav_icon.png">
+	<link rel="apple-touch-icon" href="/apple-touch-icon.png">
+  	<link rel="stylesheet" href="css/javascript_001.css">
+  	<script>
+	//<!--
+		var count = 0;
+		function cambiaLista (nameItem) {
+			document.querySelector("#" + nameItem).textContent = "Ops, no tengo " + nameItem;
+			//getElementById(nameItem);
+			count ++; 
+			if (count == 4) document.write("Lo siento, parece que estoy ilocalizable");
+		}
+	// -->
+	</script>
+</head>
+
+ <body>
+ <!--body  onload="alert('Página cargada - OK');"-->
+ 
+  	<header>
+  	<h1>Sencilla pagina para comprobar el DOM
+    </h1>
+	</header>
+  	<aside>
+  		<noscript>
+   	 		<p>
+     			<em>Si lees este mensaje es que tu navegador no 
+					ejecuta guiones JavaScript</em>
+    		</p>
+  		</noscript>
+	</aside>
+	<article>
+
+		<h2>Para contactar conmigo</h2>
+		<ul>
+			<li id="twitter" class="sprite">
+				<a href="#" onclick = "cambiaLista('twitter')" title="http://www.twitter.com">
+					Twitter</a>	
+			</li>
+			<li id="facebook" class="sprite">
+				<a href="#" onclick = "cambiaLista('facebook')" title="http://www.facebook.com">
+					Facebook</a>
+			</li>
+			<li id="flickr" class="sprite">
+				<a href="#" onclick = "cambiaLista('flickr')" title="http://www.flickr.com">
+					Flickr</a>
+			</li>
+			<li id="linkedin" class="sprite">
+				<a href="#" onclick = "cambiaLista('linkedin')" title="http://www.linkedin.com">
+					LinkedIn</a>
+			</li>
+		</ul>
+
+	</article>
+	<footer>
+		<p>
+			&copy; Copyright  by Alejandro L. Cerezo
+		</p>
+	</footer>
+ </body>
+
+</html>

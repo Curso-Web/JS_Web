@@ -1,0 +1,70 @@
+﻿<!DOCTYPE HTML>
+<html lang="es">
+
+<head>
+	<meta charset="UTF-8">
+	<title>Mostrar texto oculto - JavaScript_001</title>
+	<meta name="description" content="Ejercicios del Curso CMF">
+	<meta name="author" content="Alejandro">
+  	<link rel="shortcut icon" href="fav_icon.png">
+	<link rel="stylesheet" href="css/javascript_001.css">
+  	<style>
+		.oculto { display: none; }
+		a:visited {color: blue;}
+	</style>
+	<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
+  	<script>
+		
+		$(function() {
+			$('a').click(function () {
+					$('span').each(function () {
+						if ($(this).attr("class") == "oculto"){
+							$(this).removeClass("oculto");										
+						}else{
+							$(this).addClass("oculto");
+						}		
+					});// fin each
+			}); // fin de click
+		}); // fin del documentt ready ()
+		
+	</script>
+</head>
+
+ <body>
+
+  	<header>
+  		<h1>Scriptum</h1>
+	</header>
+  	<aside>
+  		<noscript>
+   	 		<p>
+     			<em>Si lees este mensaje es que tu navegador no 
+					ejecuta guiones JavaScript</em>
+    		</p>
+  		</noscript>
+	</aside>
+	<article>
+		<h2>Mensaje del consul</h2>
+		<p id="texto">Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Sed
+		mattis enim vitae orci. Phasellus libero. Maecenas nisl arcu, consequat congue,
+		commodo nec, commodo ultricies, turpis. Quisque sapien nunc, posuere vitae,
+		rutrum et, luctus at, pede. Pellentesque massa ante, ornare id, aliquam vitae,
+		ultrices porttitor, pede. <span class="oculto">Nullam sit amet
+		nisl elementum elit convallis malesuada. Phasellus magna sem, semper quis,
+		faucibus ut, rhoncus non, mi. Duis pellentesque, felis eu adipiscing
+		ullamcorper, odio urna consequat arcu, at posuere ante quam non dolor. Lorem
+		ipsum dolor sit amet, consectetuer adipiscing elit. Duis scelerisque. Donec
+		lacus neque, vehicula in, eleifend vitae, venenatis ac, felis. Donec arcu. Nam
+		sed tortor nec ipsum aliquam ullamcorper. Duis accumsan metus eu urna. Aenean
+		vitae enim. Integer lacus. Vestibulum venenatis erat eu odio. Praesent id
+		metus.</span></p>
+		<a  href="#"><span>Seguir leyendo</span>
+			         <span class="oculto">Resumir</span>
+        </a>
+	</article>
+	<footer>
+		<p>&copy; Copyright  by Alejandro L. Cerezo</p>
+	</footer>
+ </body>
+
+</html>

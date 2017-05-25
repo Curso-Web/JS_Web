@@ -1,0 +1,98 @@
+﻿<!DOCTYPE HTML>
+<html lang="es">
+
+<head>
+	<meta charset="UTF-8">
+	<title>DOM - JavaScript_001</title>
+	<meta name="description" content="Ejercicios del Curso CMF">
+	<meta name="author" content="Alejandro">
+  	<link rel="shortcut icon" href="fav_icon.png">
+  	<link rel="stylesheet" href="javascript_001.css">
+  	<script>
+
+        function Lista() {
+            this.count = 0;
+            this.enlaces = document.querySelectorAll(".sprite");
+            // nodeList con todos los Items (li) de la clase sprite
+            this.nameItem = "";
+            this.domLink;
+            this.domItem;
+
+            for (var i = 0; i < this.enlaces.length; i++) {
+                // Se asocia el manejador de eventos con cada item (li) de la lista
+                this.enlaces[i].addEventListener("click", this.cambiaLista.bind(this), false);
+                //this.enlaces[i].onclick = this.cambiaLista.bind(this);
+            }
+
+        } // Fin de la función constructora Lista()
+
+        Lista.prototype.cambiaLista = function (oEvent) {
+
+            this.domItem = oEvent.currentTarget
+            // node del item (li) pulsado
+            this.domLink = this.domItem.children[0];
+            // nodo del link (a) pulsado
+            // también sería this.domLink = oEvent.target;
+            this.nameItem = this.domLink.id;
+            // id del link (a) incluido en el item (li) seleccionado
+            this.domItem.textContent = "Ops, no tengo " + this.nameItem;
+            // cambio del contenido del item
+            this.count++;
+            if (this.count == 4) {
+                this.domItem.parentNode.innerHTML = "<p>Lo siento, parece que estoy ilocalizable</p>";
+                // cambio del contenido del ul completo
+            }
+        } // Fin de la función prototype.cambiaLista()
+
+		
+        document.addEventListener("DOMContentLoaded", function () { oLista = new Lista(); }, false)
+
+	</script>
+</head>
+
+ <body>
+ <!--body  onload="alert('Página cargada - OK');"-->
+ 
+  	<header>
+  	<h1>Sencilla pagina para comprobar el DOM
+    </h1>
+	</header>
+  	<aside>
+  		<noscript>
+   	 		<p>
+     			<em>Si lees este mensaje es que tu navegador no 
+					ejecuta guiones JavaScript</em>
+    		</p>
+  		</noscript>
+	</aside>
+	<article>
+
+		<h2>Para contactar conmigo</h2>
+		<ul>
+			<li class="sprite">
+				<a id="twitter" href="#" title="http://www.twitter.com">
+					Twitter</a>	
+			</li>
+			<li class="sprite">
+				<a id="facebook" href="#" title="http://www.facebook.com">
+					Facebook</a>
+			</li>
+			<li class="sprite">
+				<a id="flickr" href="#" title="http://www.flickr.com">
+					Flickr</a>
+			</li>
+			<li class="sprite">
+				<a id="linkedin" href="#" title="http://www.linkedin.com">
+					LinkedIn</a>
+			</li>
+		</ul>
+
+	</article>
+	<footer>
+		<p>
+			&copy; Copyright  by Alejandro L. Cerezo
+		</p>
+	</footer>
+ </body>
+
+</html>

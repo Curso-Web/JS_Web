@@ -1,0 +1,160 @@
+﻿<!DOCTYPE HTML>
+<html lang="es">
+
+<head>
+	<meta charset="UTF-8">
+	<title>DOM Lista - JavaScript_001</title>
+	<meta name="description" content="Ejercicios del Curso CMF">
+	<meta name="author" content="Alejandro">
+    <link rel="shortcut icon" href="fav_icon.png">
+	<link rel="apple-touch-icon" href="/apple-touch-icon.png">
+  	<link rel="stylesheet" href="css/javascript_001.css">
+  	<script>
+
+		// The .bind method from Prototype.js 
+		// Se encorpora el método bind, en caso de que no esté implementado
+	    if (!Function.prototype.bind) { // check if native implementation available
+	      Function.prototype.bind = function(){ 
+	        var fn = this, args = Array.prototype.slice.call(arguments),
+	            object = args.shift(); 
+	        return function(){ 
+	          return fn.apply(object, 
+	            args.concat(Array.prototype.slice.call(arguments))); 
+	        }; 
+	      };
+	    }
+
+	    function Concurso () {
+
+	        this.aListaRespuestas = arguments[0];
+
+	        this.oNodoConcurso = document.getElementById(arguments[1]);
+	        // Nodo DOM del corcurso (Article)		
+	        this.oNodoMensaje = this.oNodoConcurso.children[3]; 
+	        // Nodo DOM donde escribimos los mensajes
+	        this.oNodoLista = this.oNodoConcurso.children[2];
+	        // Nodo DOM donde escribimos la lista
+	        this.oNodoBoton = this.oNodoConcurso.children[1];
+
+
+
+	        this.cad = "";// almacenara lo que escriba el usuaroo
+		    this.pos = 0; // resultado de la busqueda (-1 indica no encontrado)
+
+		    this.pregunta = "Escribe un nombre válido"
+		    this.mensaje_eror = ' no es un nombre válido.'
+
+		    this.oNodoBoton.addEventListener("click", this.nuevoName.bind(this), false)
+	        // define el manejador de eventos del boton 
+		
+	    } // fin de la función constructora Concurso
+
+	    Concurso.prototype.nuevoName = function () {
+
+	        this.oNodoMensaje.innerHTML = " ";
+	        this.cad = prompt(this.pregunta);
+	        this.buscarItem();
+	        // almacena en this.pos la posición de this.cad en la lista aListaReyes o -1 si no está
+
+	        if (this.pos >= 0)
+	            this.add();
+	        else
+	            this.oNodoMensaje.innerHTML = this.cad + this.mensaje_eror;
+
+	    }
+
+	    Concurso.prototype.buscarItem = function () {
+	        for (var ind = 0; ind < this.aListaRespuestas.length; ind++) {
+	            if (this.aListaRespuestas[ind].toUpperCase() == this.cad.toUpperCase())
+	                break;
+	        }
+	        this.pos = ind < this.aListaRespuestas.length ? ind : -1;
+	    }
+
+	    Concurso.prototype.add = function () {
+	        var elemento = document.createElement("li");
+	        var texto = document.createTextNode(this.cad);
+	        elemento.appendChild(texto);
+	        this.oNodoLista.appendChild(elemento);
+	    }
+
+	    Concurso.prototype.add_facil = function () {
+	        this.oNodoLista.innerHTML += "<li>" + this.cad + "</li>";
+	    }
+
+
+	    function main() {
+
+	        //****************Primer concurso
+
+		    var aLista = new Array('Fernando', 'Isabel', 'Juana', 'Carlos', 'Felipe', 
+								    'Luis', 'Jose', "Amadeo", 'Alfonso', 'Juan Carlos');
+		
+		    var concurso = "Reyes"
+		    // definen el id del <article> que contendra el interfaz
+		
+		    var oConcursoReyes = new Concurso(aLista, concurso); 
+		    // instancia el objeto correspondiente al concurso
+
+
+            //******************Segundo concurso
+
+		    aLista = new Array("Ataúlfo", "Sigérico", "Walia", "Teodorico", "Turismundo", "Gesaleico", "Amalarico",
+							    "Theudis", "Theudiselo", "Agila", "Atanagildo", "Liuva", "Leovigildo", "Recaredo",
+							    "Witérico", "Gundemaro", "Sisebuto", "Suínthila", "Sisenando", "Khíntila", "Tulga",
+							    "Khindasvinto", "Recesvinto", "Wamba", "Ervigio", "Egica", "Witiza", "Rodrigo");		
+	        // define el array de respuestas válidas
+
+		    concurso = "Godos"
+	        // definen el id del <article> que contendra el interfaz
+      		
+		    var oConcursoRGodos = new Concurso(aLista, concurso);
+	        // instancia el objeto correspondiente al concurso
+
+	    } // fin de la función main()
+
+	    document.addEventListener("DOMContentLoaded",main,false)
+	</script>
+</head>
+
+ <body>
+ <!--body  onload="alert('Página cargada - OK');"-->
+ 
+  	<header>
+  	<h1>Listas y concursos</h1>
+	</header>
+  	
+  	<aside>
+  		<noscript>
+   	 		<p>
+     			<em>Si lees este mensaje es que tu navegador no 
+					ejecuta guiones JavaScript</em>
+    		</p>
+  		</noscript>
+	</aside>
+	<article id="Reyes">
+    	<h2>Los nombres de los Reyes de España</h2>
+	    
+       	<input id="btnReyes" name="btnReyes" type="button" value="Añadir elemento"> 	
+        <ul id="listaReyes"></ul>
+
+		<p id="respuestaReyes">&nbsp;</p>
+
+	</article>	
+	<article id="Godos">
+    	<h2>Los nombres de los Reyes Godos</h2>
+	    
+       	<input id="btnGodos" name="btnGodos" type="button" value="Añadir elemento"> 	
+        <ul id="listaGodos"></ul>
+
+		<p id="respuestaGodos">&nbsp;</p>
+
+	</article>	
+	<footer>
+		<p>
+			&copy; Copyright  by Alejandro L. Cerezo
+		</p>
+	</footer>
+ </body>
+
+</html>

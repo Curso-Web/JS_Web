@@ -1,0 +1,111 @@
+﻿<!DOCTYPE HTML>
+<html lang="es">
+
+<head>
+	<meta charset="UTF-8">
+	<title>Eventos - JavaScript_001</title>
+	<meta name="description" content="Ejercicios del Curso CMF">
+	<meta name="author" content="Alejandro">
+  	<link rel="shortcut icon" href="fav_icon.png">
+	<link rel="apple-touch-icon" href="/apple-touch-icon.png">
+  	<link rel="stylesheet" href="css/javascript_001.css">
+  	
+  	<style type="text/css">
+		body {font-family: arial, helvetica;}
+        #info {
+            position: fixed;
+            width: 160px;
+            border: thin solid silver;
+            padding: .5em;
+        }
+		#info h1 {margin: 0;}
+		#espacio {
+            /*Se añade un div muy alto para que haya scroll*/
+			width: 1500px;
+			height:  1500px;
+		}
+        .infoRaton {
+            background-color: #f0f0f0;
+        }
+        .infoTeclado {
+            background-color: #CCE6FF;
+        }
+	</style>
+
+  	<script>
+        // En la versión más simple no tenemos en cuenta
+        // la posibilidad de que el navegador sea IE
+		
+		function informacion(evento) {
+			
+			switch(evento.type) {
+
+			case 'mousemove':
+			    document.getElementById('info').classList.add("infoRaton");
+			    document.getElementById('info').classList.remove("infoTeclado");
+
+    			var absolutaX = evento.pageX,
+				    absolutaY = evento.pageY,
+                    relativaX = evento.clientX,
+                    relativaY = evento.clientY;
+
+				muestraInformacion(['Ratón', 'Navegador [' + relativaX + ',' + relativaY + ']', 'Pagina [' + absolutaX + ',' + absolutaY + ']']);
+				break;
+		
+			case 'keypress':
+                document.getElementById('info').classList.add("infoTeclado");
+                document.getElementById('info').classList.remove("infoRaton");
+
+			    var caracter = evento.charCode || evento.keyCode;
+				var letra = String.fromCharCode(caracter);
+				var codigo = letra.charCodeAt(0);
+				muestraInformacion(['Teclado', 'Carácter ['+letra+']', 'Código['+codigo+']']);
+				break;
+			//case 'click':
+			//	break;
+			};
+		}; // fin de la función informacion
+
+		function muestraInformacion(mensaje) {
+			document.getElementById("info").innerHTML = '<h1>'+mensaje[0]+'</h1>';
+			for(var i=1; i<mensaje.length; i++) {
+				document.getElementById("info").innerHTML += '<p>'+mensaje[i]+'</p>';
+			};
+		}; // fin de la función muestraInformacion
+
+		window.onload = function() {
+			document.onmousemove = informacion;
+			document.onkeypress = informacion;
+			//document.onclick = informacion;
+		} // fin de window.onload
+
+
+	</script>
+</head>
+
+ <body>
+ <!--body  onload="alert('Página cargada - OK');"-->
+ 
+  	<header>
+  		<h1>Eventos del raton</h1>
+	</header>
+  	<aside>
+  		<noscript>
+   	 		<p>
+     			<em>Si lees este mensaje es que tu navegador no 
+					ejecuta guiones JavaScript</em>
+    		</p>
+  		</noscript>
+	</aside>
+	<article>
+		<div id="info"> </div>
+		<div id="espacio"> </div>
+	</article>
+	<footer>
+		<p>
+			&copy; Copyright  by Alejandro L. Cerezo
+		</p>
+	</footer>
+ </body>
+
+</html>

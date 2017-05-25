@@ -1,0 +1,128 @@
+﻿<!DOCTYPE HTML>
+<html lang="es">
+
+<head>
+	<meta charset="UTF-8">
+	<title>Formulario - JavaScript</title>
+	<meta name="description" content="Ejercicios del Curso CMF">
+	<meta name="author" content="Alejandro">
+  	<link rel="shortcut icon" href="fav_icon.png">
+  	<link rel="stylesheet" href="default.css">
+  	<script>
+        // The .bind method from Prototype.js 
+        // Se encorpora el método bind, en caso de que no esté implementado
+        if (!Function.prototype.bind) { // check if native implementation available
+            Function.prototype.bind = function () {
+                var fn = this, args = Array.prototype.slice.call(arguments),
+                    object = args.shift();
+                return function () {
+                    return fn.apply(object,
+                      args.concat(Array.prototype.slice.call(arguments)));
+                };
+            };
+        }
+
+        function main() {
+            var oFormulario = {
+                oDatos: {"Nombre": "",
+                         "Apellidos": "",
+                         "Dirección": "",
+                         "Ciudad": "",
+                         "Comentarios": "",
+                 },
+                oParrafo: document.getElementById("listaDatos"), // referencia del párrafo donde escribir
+                recogeDatos: function (oE) {
+                    this.oDatos.Nombre = document.getElementById("fname").value;
+                    this.oDatos.Apellidos = document.getElementById("apell").value;
+                    this.oDatos.Dirección = document.getElementById("address").value;
+                    this.oDatos.Ciudad = document.getElementById("city").value;
+                    this.oDatos.Comentarios = document.getElementById("coment").value;
+                    //llamada a la función que procesara el objeto presentandolo en pantalla
+                    this.escribeDatos();
+                    oE.preventDefault();
+                    //anula el comportamiento por defecto de submit
+                }, //Fin del método recogeDatos
+                escribeDatos: function () {
+                    //ocultar formulario
+                    document.getElementById("form_1").classList.toggle("oculto")
+                    //mostrar bloque div para el resultado
+                    document.getElementById("resultado").classList.toggle("oculto");
+                    //incorporamos a la lista cada elemento del objeto		
+                    for (var i in this.oDatos) {
+                        this.oParrafo.innerHTML += "<li>" + i + ": <strong>" +
+                            this.oDatos[i] + "</strong></li>";
+                    };
+                }, //Fin del método escribedatos	
+            }; // Fin del objeto oFormulario
+            
+            document.getElementById("submit").addEventListener("click",
+                oFormulario.recogeDatos.bind(oFormulario));
+                
+        } // Fin de la función main()
+
+	    document.addEventListener("DOMContentLoaded", main, false);
+	//metodo de DOM nivel 2  que indica al agente de usuario que permanezca atento:
+	// evento: en este caso la carga completa de la página
+	// función a lanzar: en este caso iniciaBoton
+	// orden del flujo de eventos: false salta la fase de captura
+	 // equivale a  window.onload = iniciaBoton; 	
+
+	</script>
+</head>
+
+ <body>
+ <!--body  onload="alert('Página cargada - OK');"-->
+ 
+ 
+  	<header>
+  	<h1 title="Formulario 1">
+  		Inscripción como docente (Tajamar)
+    </h1>
+	</header>
+  	<aside>
+  		<noscript>
+   	 		<p>
+     			<em>Si lees este mensaje es que tu navegador no 
+					ejecuta guiones JavaScript</em>
+    		</p>
+  		</noscript>
+	</aside>
+	<article>		
+ 		<form name ="form_1" id="form_1" method="post" action="http:\\localhost" enctype="text/plain">
+ 		  	<fieldset><legend>Datos personales</legend>
+		        <p><label for="fname">Nombre:</label>
+ 		  	        <input type="text" id="fname" name="fname" size="30" placeholder="Escriba su nombre">
+                </p>
+	            <p><label for="apell">Apellido:</label>
+	      	        <input type="text" id="apell" name="apell" size="30" maxlength="100" placeholder="Escriba sus apellidos">
+                </p>      
+	            <p><label for="address">Domicilio:</label>
+	      	        <input type="text" id="address" name="address" size="30"maxlength="200" placeholder="Escriba su dirección">
+                </p>
+	            <p><label for="city">Ciudad:</label>
+	    	        <input type="text" id="city" name="city" placeholder="Escriba su ciudad">
+                </p> 
+		        <p><label class="top" for="coment">Comentarios:</label>
+			        <textarea id="coment" name="coment" placeholder="Escriba los comentarios que consideres oprtunos"> </textarea>
+                </p>
+			</fieldset>	
+			<fieldset>
+			    <p><label></label>
+                    <input id="submit" type="submit" value="Aceptar"> &nbsp; 
+				    <input id="reset" type="reset" value="Borrar"></p>
+			</fieldset>
+		</form>
+
+		<div id="resultado" class="oculto">
+			<h2>Los datos del usuario son los siguientes</h2>			
+		<ul id="listaDatos"> </ul>
+		</div>	
+
+	</article>
+	<footer>
+		<p>&copy; Copyright  by  Alejandro L. Cerezo</p>
+		<p><a href="mailto:alcerezo@microforum.es">alcerezo@micorforum.es</a></p>
+	</footer>
+ </body>
+
+</html>

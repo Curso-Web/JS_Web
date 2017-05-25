@@ -1,0 +1,114 @@
+﻿<!DOCTYPE HTML>
+<html lang="es">
+
+<head>
+	<meta charset="UTF-8">
+	<title>Eventos - JavaScript_001</title>
+	<meta name="description" content="Ejercicios del Curso CMF">
+	<meta name="author" content="Alejandro">
+  	<link rel="shortcut icon" href="fav_icon.png">
+	<link rel="apple-touch-icon" href="/apple-touch-icon.png">
+  	<link rel="stylesheet" href="css/javascript_001.css">
+  	
+  	<style type="text/css">
+		body {font-family: arial, helvetica;}
+		#info {
+				position:fixed;
+				width:160px; 
+				border:thin solid silver; 
+				padding:.5em;
+				}
+		#info h1 {margin: 0;}
+		#espacio {
+			width: 1500px;
+			height:  1500px;
+		}
+	</style>
+
+  	<script>
+	//<!--
+		
+		function informacion(elEvento) {
+			var evento = elEvento || window.event;
+
+			switch(evento.type) {
+
+			case 'mousemove':
+				document.getElementById('info').style.backgroundColor = '#f0f0f0';
+				var ie = navigator.userAgent.toLowerCase().indexOf('msie')!=-1;
+				var coordenadaXrelativa, coordenadaYrelativa, coordenadaXabsoluta,coordenadaYabsoluta;
+				if(ie) {
+					if(document.documentElement && document.documentElement.scrollTop){coordenadaXabsoluta = evento.clientX + document.documentElement.scrollLeft;
+						coordenadaYabsoluta = evento.clientY + document.documentElement.scrollTop;
+					}
+					else {
+						coordenadaXabsoluta = evento.clientX + document.body.scrollLeft;
+						coordenadaYabsoluta = evento.clientY + document.body.scrollTop;
+					}
+				}
+				else {
+					coordenadaXabsoluta = evento.pageX;
+					coordenadaYabsoluta = evento.pageY;
+				}
+				coordenadaXrelativa = evento.clientX;
+				coordenadaYrelativa = evento.clientY;
+				muestraInformacion(['Ratón', 'Navegador ['+coordenadaXrelativa+','+coordenadaYrelativa+']', 'Pagina ['+coordenadaXabsoluta+','+coordenadaYabsoluta+']']);
+				break;
+		
+			case 'keypress':
+				document.getElementById('info').style.backgroundColor = '#CCE6FF';
+				var caracter = evento.charCode || evento.keyCode;
+				var letra = String.fromCharCode(caracter);
+				var codigo = letra.charCodeAt(0);
+				muestraInformacion(['Teclado', 'Carácter ['+letra+']', 'Código['+codigo+']']);
+				break;
+			case 'click':
+				document.getElementById('info').style.backgroundColor = '#FFFFCC';
+				break;
+			};
+		}; // fin de la función informacion
+
+		function muestraInformacion(mensaje) {
+			document.getElementById("info").innerHTML = '<h1>'+mensaje[0]+'</h1>';
+			for(var i=1; i<mensaje.length; i++) {
+				document.getElementById("info").innerHTML += '<p>'+mensaje[i]+'</p>';
+			};
+		}; // fin de la función muestraInformacion
+
+		window.onload = function() {
+			document.onmousemove = informacion;
+			document.onkeypress = informacion;
+			document.onclick = informacion;
+
+		} // fin de window.onload
+
+
+	</script>
+</head>
+
+ <body>
+ <!--body  onload="alert('Página cargada - OK');"-->
+ 
+  	<header>
+  		<h1>Eventos del raton</h1>
+	</header>
+  	<aside>
+  		<noscript>
+   	 		<p>
+     			<em>Si lees este mensaje es que tu navegador no 
+					ejecuta guiones JavaScript</em>
+    		</p>
+  		</noscript>
+	</aside>
+	<article>
+		<div id="info"> </div>
+		<div id="espacio"> </div>
+	</article>
+	<footer>
+		<p>
+			&copy; Copyright  by Alejandro L. Cerezo
+		</p>
+	</footer>
+ </body>
+
+</html>

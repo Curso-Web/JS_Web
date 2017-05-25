@@ -1,0 +1,87 @@
+﻿<!DOCTYPE HTML>
+<html lang="es">
+
+<head>
+	<meta charset="UTF-8">
+	<title>DOM Lista - JavaScript_001</title>
+	<meta name="description" content="Ejercicios del Curso CMF">
+	<meta name="author" content="Alejandro">
+    <link rel="shortcut icon" href="fav_icon.png">
+	<link rel="apple-touch-icon" href="/apple-touch-icon.png">
+  	<link rel="stylesheet" href="css/javascript_001.css">
+  	<script>
+	//<!--
+
+	function main () {
+
+		function nuevoName () {
+			var listaReyes = new Array('Fernando', 'Isabel', 'Juana', 'Carlos', 'Felipe', 
+								'Luis', 'Jose', "Amadeo", 'Alfonso', 'Juan Carlos');
+			var mensaje = document.getElementById("respuesta");
+			mensaje.innerHTML=" ";
+	      	var cad = prompt("Escribe un nombre de Rey");
+			var pos = buscarItem(listaReyes, cad);
+			
+			if (pos >=0)
+				add(cad);
+			else
+				mensaje.innerHTML= cad+ ' no es el nombre de un rey de España.';
+
+		}
+
+		function buscarItem(lista, cad) {
+				for (var ind = 0; ind < lista.length; ind++) {
+					if (lista[ind].toUpperCase() == cad.toUpperCase())
+						break;
+				}
+				return (ind < lista.length ? ind : -1);	
+			}
+		
+		function add(nuevoElemento) {
+			var elemento = document.createElement("li");
+			var texto = document.createTextNode(nuevoElemento);
+			elemento.appendChild(texto);
+			var lista = document.getElementById("lista");
+			lista.appendChild(elemento);
+				//var nuevoElemento = "<li>" + nuevoElemento + "</li>";
+				// lista.innerHTML = lista.innerHTML + nuevoElemento;
+			}
+
+		document.getElementById("btnAdd").onclick = nuevoName;	
+
+	} // fin de la función main()
+
+	document.addEventListener("DOMContentLoaded",main,false)
+	</script>
+</head>
+
+ <body>
+ <!--body  onload="alert('Página cargada - OK');"-->
+ 
+  	<header>
+  	<h1>Los nombres de los Reyes de España</h1>
+	</header>
+  	<aside>
+  		<noscript>
+   	 		<p>
+     			<em>Si lees este mensaje es que tu navegador no 
+					ejecuta guiones JavaScript</em>
+    		</p>
+  		</noscript>
+	</aside>
+	<article>
+        
+       	<input id="btnAdd" name="btnAdd" type="button" value="Añadir elemento"> 	
+        <ul id="lista"></ul>
+
+		<p id="respuesta">&nbsp;</p>
+
+	</article>	
+	<footer>
+		<p>
+			&copy; Copyright  by Alejandro L. Cerezo
+		</p>
+	</footer>
+ </body>
+
+</html>

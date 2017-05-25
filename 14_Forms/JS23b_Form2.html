@@ -1,0 +1,192 @@
+﻿<!DOCTYPE HTML>
+<html lang="es">
+
+<head>
+	<meta charset="UTF-8">
+	<title>Formulario - JavaScript</title>
+	<meta name="description" content="Ejercicios del Curso CMF">
+	<meta name="author" content="Alejandro">
+  	<link rel="shortcut icon" href="/favicon.ico">
+	<link rel="apple-touch-icon" href="/apple-touch-icon.png">
+  	<link rel="stylesheet" href="css/javascript_001.css">
+  	<script>
+	//<!--
+	
+	function iniciaBoton (argument) {
+		document.getElementById("submit").onclick = recogeDatos;
+	}
+	
+	// Ejemplo de la función utilizando el paso del nodo del boton como atributo
+	// no se utiliza
+	function escribeDatos (vboton){		
+		
+		var var_1 = vboton.form;
+		var sName_1 = var_1.fname.value;
+		var sApell_1 = var_1.apell.value;
+		var sAddress_1 = var_1.address.value;
+		var sCity_1 = var_1.city.value;		
+		alert ("Pulsado " + vboton.value);
+		alert (sName_1 + " " + sApell_1 + " " + sAddress_1 + " " + sCity_1);
+	}	
+	
+	function recogeDatos (){
+		var aSalida = new Array();
+		var sName = document.getElementById("fname").value;
+		var nI = 0;
+		aSalida[nI++] = "Nombre: <strong>" + sName + "</strong>";
+		var sApell = document.getElementById("apell").value;
+		aSalida[nI++] = "Apellidos: <strong>" + sApell + "</strong>";
+		var sAddress = document.getElementById("address").value;
+		aSalida[nI++] = "Dirección: <strong>" + sAddress + "</strong>";
+		var sCity = document.getElementById("city").value;
+		aSalida[nI++] = "Ciudad: <strong>" + sCity + "</strong>";		
+		var sComent = document.getElementById("coment").value;
+		aSalida[nI++] = "Comentarios: <strong>" + sComent + "</strong>";
+		aSalida[nI++] = "<br>";
+
+		//radiobuttons
+		var aJoomla = document.getElementsByName("pregunta");
+		for(var i=0; i<aJoomla.length; i++) {
+		 	if (aJoomla[i].checked) {
+		 		aSalida[nI++] = "Preparado para dar Joomla! : <strong>" + aJoomla[i].value.toUpperCase() + "</strong>";
+		 	}
+		}
+				
+		//checkbox
+		var oCond = document.getElementById("condiciones");
+		if (oCond.checked) {
+			aSalida[nI++] = "Condiciones leidas! : <strong>SI</strong>";
+		} 
+		else{
+			aSalida[nI++] = "Condiciones leidas : <strong>NO</strong>";		
+		};
+		
+		var oCond1 = document.getElementById("condiciones_1");
+		if (oCond1.checked) {
+			aSalida[nI++] = "Condiciones leidas 2! : <strong>SI</strong>";
+		} 
+		else{
+			aSalida[nI++] = "Condiciones leidas 2 : <strong>NO</strong>";		
+		};
+		
+	
+		//select options
+		var nSelect = document.getElementById("opciones").selectedIndex;
+		var sOpcion = document.getElementById("opciones").options[nSelect];
+		var textoSeleccionado = sOpcion.text; // Segundo valor
+		var valorSeleccionado = sOpcion.value; // 2
+		aSalida[nI++] = "Nivel de JavaScript : <strong>" + textoSeleccionado + "</strong>";
+		aSalida[nI] = "<br>";
+		
+		//llamada a la función que procesara el arry presentandolo en pantalla
+		escribeDatos (aSalida);
+	}
+	
+
+	function escribeDatos (aDatos) {
+		//ocultar formulario
+		document.getElementById("form_1").style.display = "none";
+		//mostrar bloque div para el resultado
+		document.getElementById("resultado").style.display = "block";
+		// referencia del párrafo donde escribir
+		oParrafo = document.getElementById("parrafo_1");
+		//incorporamos al parrafo cada línea del array		
+	  	for (var i=0; i < aDatos.length; i++) {
+	  		if (i != aDatos.length-1) {sNuevoElemento = aDatos[i] + "<br>";}
+	  		else {sNuevoElemento = aDatos[i];}
+			oParrafo.innerHTML = oParrafo.innerHTML + sNuevoElemento;
+	  	};
+	}	
+
+document.addEventListener("DOMContentLoaded", iniciaBoton, false);	
+	//metodo de DOM nivel 2  que indica al agente de usuario que permanezca atento:
+	// evento: en este caso la carga completa de la página
+	// función a lanzar: en este caso iniciaBoton
+	// orden del flujo de eventos: false salta la fase de captura
+	
+	// -->
+	</script>
+</head>
+
+ <body>
+ <!--body  onload="alert('Página cargada - OK');"-->
+ 
+ 
+  	<header>
+  	<h1 title="Formulario 1">
+  		Inscripción como docente (Tajamar)
+    </h1>
+	</header>
+  	<aside>
+  		<noscript>
+   	 		<p>
+     			<em>Si lees este mensaje es que tu navegador no 
+					ejecuta guiones JavaScript</em>
+    		</p>
+  		</noscript>
+	</aside>
+	<article>
+		
+
+
+
+ 		<form name ="form_1" id="form_1" method="post" action="mailto:alcerezo@microforum.es" enctype="text/plain">
+ 		  	<fieldset><legend>Datos personales</legend>
+		  	<p><label for="fname">Nombre:</label>
+ 		  		<input type="text" id="fname" name="fname" size="30" placeholder="Escriba su nombre"></p>
+	      	<p><label for="apell">Apellido:</label>
+	      		<input type="text" id="apell" name="apell" size="30" maxlength="100" placeholder="Escriba sus apellidos"></p>      
+	      	<p><label for="address">Domicilio:</label>
+	      		<input type="text" id="address" name="address" size="30"maxlength="200" placeholder="Escriba su dirección"></p>
+	    	<p><label for="city">Ciudad:</label>
+	    		<input type="text" id="city" name="city" placeholder="Escriba su ciudad"></p> 
+			<p><label for="coment">Comentarios:</label>
+				<textarea id="coment" name="coment" placeholder="Escriba los comentarios que consideres oprtunos"></textarea></p>
+			</fieldset>	
+
+			<fieldset><legend>Datos técnicoss</legend>
+		  	<p><label for="pregunta">¿Estas preparado para dar un curso de Joomla!?</label>	
+			<input type="radio" value="si" name="pregunta" id="pregunta_si"/> SI
+			<input type="radio" value="no" name="pregunta" id="pregunta_no"/> NO
+			<input type="radio" value="nsnc" name="pregunta" id="pregunta_nsnc"/> NS/NC
+			</p>
+			<p>
+			<input type="checkbox"  id="condiciones" value="condiciones" name="condiciones">
+			<label for="condiciones">He leído y acepto las condiciones</label>
+			</p>
+			<p>
+			<input type="checkbox"  id="condiciones_1" value="condiciones_1" name="condiciones_1">
+			<label for="condiciones">He leído y acepto las condiciones 2</label>
+			</p>
+			<p><label for="opciones">Tu nivel de JavaScript es</label>
+			<select id="opciones" name="opciones">
+				<option value="1">Muy Alto</option>
+				<option value="2">Alto</option>
+				<option value="3">Medio</option>
+				<option value="4">Bajo</option>
+			</select>					
+			</p>
+			</fieldset>
+			<fieldset>
+			<p><input id="submit" type="button" value="Aceptar"> &nbsp; 
+				<input id="reset" type="reset" value="Borrar"></p>
+			</fieldset>
+		</form>
+		<div id="resultado" style="display: none">
+			<h2>Los datos del usuario son los siguientes</h2>			
+		<p id="parrafo_1"> </p>
+		</div>	
+
+ 		<script>
+   			//<!--document.write("Hola Mundo");
+			//-->
+        </script>
+	</article>
+	<footer>
+		<p>
+			&copy; Copyright  by Alejandro L. Cerezo
+		</p>
+	</footer>
+ </body>
+
+</html>
