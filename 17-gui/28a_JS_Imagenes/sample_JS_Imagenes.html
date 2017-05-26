@@ -1,0 +1,82 @@
+﻿<!DOCTYPE HTML>
+<html lang="es">
+<head>
+	<meta charset="UTF-8">
+	<title>Imagenes - JS</title>
+	<meta name="description" content="Ejercicios del Curso ASI">
+	<meta name="author" content="Alejandro">
+  	<link rel="shortcut icon" href="fav_icon.png">
+  	<link rel="stylesheet" href="default.css">
+    <script>
+        function main() {
+            var imgRoyo = new Image();
+            imgRoyo.src = "images/537278_luis_royo.jpg"
+
+            var domImg2 = document.getElementById("lroyo2");
+            domImg2.src = imgRoyo.src;
+            domImg2.alt = "Ilustración de Luis Royo";
+
+            console.dir(imgRoyo);
+            imgRoyo.onload = function () {
+                console.log(imgRoyo.width);
+                console.log(imgRoyo.height);                               
+                domImg2.width = imgRoyo.width / 2
+
+            }
+            
+        }
+
+        window.onload = main;
+    </script>
+</head>
+
+ <body>
+  	<header>
+  		<h1>Imagenes</h1>
+	</header>
+	<article>
+        <p>Imagen disponible en 960(alto) x 1280(ancho) presentada con un ancho de 800</p>
+        <figure>
+            <img id="lroyo1" src="images/205356_luis_royo.jpg" alt="Ilustración de Luis Royo" width="800" />                
+        </figure>
+        <p>Los valores de tamaño de la imagen se almacenan en diversas propiedades del nodo DOM:</p>
+        <ul>
+            <li>height: 600</li>
+            <li>width: 800</li>
+            <li>clientHeight: 600</li>
+            <li>clientWidth: 800</li>
+            <li>naturalHeight: 960 - resolución real</li>
+            <li>naturalWidth: 1280 - resolución real</li>
+            <li>scrollHeight: 600</li>
+            <li>scrollWidth: 800</li>
+        </ul>
+	</article>
+     <article>
+         <p>También es posible almacenar una imagen como un objeto Imagen creado en JS y vinculado con un fichero determinado:
+         </p>
+         <code>
+             var imgRoyo = new Image();<br />
+             imgRoyo.src = "205356_luis_royo.jpg"
+         </code>
+         <p>Esta imagen pre-cargada puede ser incrporada desde JS a una etiqueta IMG,<br />
+         en este caso con su tamaño al 50% calculado a partir del valor del objeto Imagen</p>
+         <code>
+             var domImg2 = document.getElementById("lroyo2");<br />
+             domImg2.src = imgRoyo.src;<br />
+             domImg2.alt = "Ilustración de Luis Royo";<br />
+             imgRoyo.onload = function () { <br />
+                domImg2.width = imgRoyo.width / 2;<br />
+             }
+         </code>
+         <figure>
+             <img id="lroyo2" src="" alt="">
+         </figure>         
+     </article>
+	<footer>
+		<p>
+			&copy; Copyright  by Alejandro L. Cerezo
+		</p>
+	</footer>
+ </body>
+
+</html>

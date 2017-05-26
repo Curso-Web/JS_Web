@@ -1,0 +1,208 @@
+﻿<!DOCTYPE html>
+
+<html lang="es">
+<head>
+	<meta name="keywords" content="web, learning, html5, css3">
+	<meta name="author" content="Alejandro" >
+	<meta name="application-name" content="…">
+	<meta name="description" content="Ejercicios de HTML5">
+	<meta name="generator" content="Bluefish 2.2.4" >
+	<meta charset="UTF-8">
+	<title>Catalogo</title>
+    <!--<link rel="stylesheet" href="flexi.css">-->
+	<link rel="shortcut icon" href="fav_icon.png">
+    <link href='http://fonts.googleapis.com/css?family=Cherry+Cream+Soda' rel='stylesheet' type='text/css'>
+	<style>
+    * {
+        box-sizing: border-box;
+    }
+		body {
+            width: 90%;
+            margin: 3em auto;
+		}
+        header {
+            width: 100%;
+            margin: 2em auto;
+            padding: 0px;
+            text-align: center;
+            font-family: 'Cherry Cream Soda', cursive;
+            color: rgb(116, 64, 64);
+            text-shadow: 3px 3px 3px rgb(177, 147, 147);
+        }
+        nav {
+            float: left;
+            width: 10%;
+        }
+        nav figure {
+            padding: 0.5em 1%;
+            margin: 0em 2%;
+            width: 100%;
+            float: left;
+            border: 1px solid black;
+            box-shadow: 5px 5px 5px 3px rgb(116, 64, 64);
+        }
+        nav figcaption {
+            height: 0em;
+            overflow: hidden;
+            
+        }
+        nav img {
+            /*display: block;*/
+            width: 100%;
+            margin: 0px;
+            padding: 0px;
+        }
+        
+        article {
+            background-color: beige;
+            float: left;
+            width: 86%;
+            margin: 1em 2%;
+            padding: 2em 5%;
+            overflow: auto;
+        }
+
+        article img {
+            width : 100%;
+        }
+
+	</style>
+</head>
+
+<body>
+	<header>
+		<h1>Terry Prachett en las imágenes de Josh Kirby</h1>
+	</header>
+	<nav>
+		<figure>
+            <a id="foto1" href="#" data-img="1">
+            <img src="images/01_Mort_Thumbnail.jpg" alt="January: Mort (1987)" title="Mort (1987)"></a>
+			<figcaption>Mort (1987)</figcaption>
+		</figure>	
+		<figure>
+            <a id="foto2" href="#" data-img="2">
+            <img src="images/02_Eric_Thumbnail.jpg" alt="Febuary: Eric (1990)" title="Eric (1990)"></a>
+			<figcaption>Eric (1990)</figcaption>
+		</figure>	
+		<figure>
+            <a id="foto3" href="#" data-img="3">
+            <img src="images/03_Wyrd_Sisters_Thumbnail.jpg" alt="March: Wyrd Sisters (1988)" title="Wyrd Sisters (1988)"></a>
+			<figcaption>Wyrd Sisters (1988)</figcaption>
+		</figure>	
+		<figure>
+            <a id="foto4" href="#" data-img="4">
+            <img src="images/04_The_Colour_Of_Magic_Thumbnail.jpg" alt="April: The Colour Of Magic (1985)" title="The Colour Of Magic (1985)"></a>
+			<figcaption>The Colour Of Magic (1985)</figcaption>
+		</figure>	
+		<figure>
+            <a id="foto5" href="#" data-img="5">
+            <img src="images/05_Reaper_Man_Thumbnail.jpg" alt="May: Reaper Man (1988)" title="Reaper Man (1988)"></a>
+			<figcaption>Reaper Man (1988)</figcaption>
+		</figure>	
+		<figure>
+            <a id="foto6" href="#" data-img="6">
+            <img src="images/06_Death_In_His_Study_Thumbnail.jpg" alt="June: Death In His Study (1990)" title="Death In His Study (1990)"></a>
+			<figcaption>Death In His Study (1990)</figcaption>
+		</figure>	
+		<figure>
+            <a id="foto7" href="#" data-img="7">
+            <img src="images/07_Moving_Pictures_Thumbnail.jpg" alt="July: Moving Pictures (1990)" title="Moving Pictures (1990)"></a>
+			<figcaption>Moving Pictures (1990)</figcaption>
+		</figure>	
+		<figure>
+            <a id="foto8" href="#" data-img="8">
+            <img src="images/08_Soul_Music_Thumbnail.jpg" alt="August: Soul Music (1994)" title="Soul Music (1994)"></a>
+			<figcaption>Soul Music (1994)</figcaption>
+		</figure>	
+		<figure>
+            <a id="foto9" href="#" data-img="9">
+            <img src="images/09_Guards_Guards_Thumbnail.jpg" alt="September: Guards, Guards (1989)" title="Guards, Guards (1989)"></a>
+			<figcaption>Guards, Guards (1989)</figcaption>
+		</figure>	
+		<figure>
+            <a id="foto10" href="#" data-img="10">
+            <img src="images/10_Colour_Magic_Light_Fantastic_Thumbnail.jpg" alt="Colour Magic - Light Fantastic (1998)" title="Colour Magic - Light Fantastic (1998)"></a>
+			<figcaption>Colour Magic - Light Fantastic (1998)</figcaption>
+		</figure>	
+		<figure>
+            <a id="foto11" href="#" data-img="11">
+            <img src="images/11_Maskerade_Thumbnail.jpg" alt="November: Maskerade (1995)" title="Maskerade (1995)"></a>
+			<figcaption>Maskerade (1995)</figcaption>
+		</figure>	
+        <figure>
+            <a id="foto12" href="#" data-img="12">
+            <img src="images/12_Hogfather_Thumbnail.jpg" alt="December: Hogfather (1997)" title="Hogfather (1997)"></a>
+            <figcaption>Hogfather (1997)</figcaption>
+        </figure>
+	</nav>
+    <article>
+       <a href=""><img alt="" title=""/></a>
+    </article>
+
+    <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.6.3/jquery.min.js"></script>
+    <script>
+
+    $(function() {
+            var aFotos = []
+            for (var i = 0; i < 13; i++) {
+                aFotos[i] = new Image()
+            };
+
+            aFotos[0].src = "images/prachett.jpg";
+            aFotos[0].alt = "Terry Prachett";
+            aFotos[0].title = "Terry Prachett";
+            aFotos[1].src = "images/01_Mort.jpg";
+            aFotos[1].alt = "January: Mort (1987)";
+            aFotos[1].title = "Mort (1987)";
+            aFotos[2].src = "images/02_Eric.jpg";
+            aFotos[2].alt = "Febuary: Eric (1990)";
+            aFotos[2].title = "Eric (1990)";
+            aFotos[3].src = "images/03_Wyrd_Sisters.jpg";
+            aFotos[3].alt = "March: Wyrd Sisters (1988)";
+            aFotos[3].title = "Wyrd Sisters (1988)";
+            aFotos[4].src = "images/04_The_Colour_Of_Magic.jpg";
+            aFotos[4].alt = "April: The Colour Of Magic (1985)";
+            aFotos[4].title = "The Colour Of Magic (1985)";
+            aFotos[5].src = "images/05_Reaper_Man.jpg";
+            aFotos[5].alt = "May: Reaper Man (1988)";
+            aFotos[5].title = "Reaper Man (1988)";
+            aFotos[6].src = "images/06_Death_In_His_Study.jpg";
+            aFotos[6].alt = "June: Death In His Study (1990)";
+            aFotos[6].title = "Death In His Study (1990)";
+            aFotos[7].src = "images/07_Moving_Pictures.jpg";
+            aFotos[7].alt = "July: Moving Pictures (1990)";
+            aFotos[7].title = "Moving Pictures (1990)";
+            aFotos[8].src = "images/08_Soul_Music.jpg";
+            aFotos[8].alt = "August: Soul Music (1994)";
+            aFotos[8].title = "Soul Music (1994)"; 
+            aFotos[9].src = "images/09_Guards_Guards.jpg";
+            aFotos[9].alt = "September: Guards, Guards (1989)";
+            aFotos[9].title = "Guards, Guards (1989)"; 
+            aFotos[10].src = "images/10_Colour_Magic_Light_Fantastic.jpg";
+            aFotos[10].alt = "Colour Magic - Light Fantastic (1998)";
+            aFotos[10].title = "Colour Magic - Light Fantastic (1998)";
+            aFotos[11].src = "images/11_Maskerade.jpg";
+            aFotos[11].alt = "November: Maskerade (1995)";
+            aFotos[11].title = "Maskerade (1995)";
+            aFotos[12].src = "images/12_Hogfather.jpg";
+            aFotos[12].alt = "December: Hogfather (1997)";
+            aFotos[12].title = "Hogfather (1997)";
+
+            $('article a').attr('href', aFotos[0].src);
+            $('article img').attr('src', aFotos[0].src).
+                            attr('alt', aFotos[0].alt).
+                            attr('title', aFotos[0].title);
+            
+
+            $('nav a').click(function(oEvent){
+                var i = oEvent.currentTarget.getAttribute("data-img");
+                $('article a').attr('href', aFotos[i].src);
+                $('article img').attr('src', aFotos[i].src).
+                         attr('alt', aFotos[i].alt).
+                         attr('title', aFotos[i].title);
+            }); // fin del img click
+        }); // fin del ready
+    </script>
+
+</body>
+</html>

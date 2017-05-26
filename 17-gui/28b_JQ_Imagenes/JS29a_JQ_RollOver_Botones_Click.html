@@ -1,0 +1,71 @@
+﻿<!DOCTYPE html>
+
+<html lang="es">
+<head>
+	<meta name="keywords" content="web, learning, html5, css3">
+	<meta name="author" content="Alejandro" >
+	<meta name="application-name" content="…">
+	<meta name="description" content="Ejercicios de HTML5">
+	<meta name="generator" content="Bluefish 2.2.4" >
+	<meta charset="UTF-8">
+	<title>Imágenes</title>
+	<link rel="stylesheet" href="default.css">
+	<link rel="shortcut icon" href="fav_icon.png">
+	<style>
+		ul {list-style: none;}
+		li {display: block;
+			margin-top: 2em;
+			width: 15%;
+			padding: 1em 2em;
+			border: 1px solid black;
+			border-radius: 24px;
+			background-image: -webkit-gradient(linear, center top, center bottom, from(rgba(252,252,252,0.5)), to(rgba(191,191,191,0.5)), color-stop(3%, rgba(247,247,247,0.5)), color-stop(12%, rgba(242,242,242,0.5)), color-stop(90%, rgba(217,217,217,0.5)));
+			background-image: -webkit-linear-gradient(top, rgba(252,252,252,0.5), rgba(247,247,247,0.5) 3%, rgba(242,242,242,0.5) 12%, rgba(217,217,217,0.5) 90%, rgba(191,191,191,0.5));
+			background-image: -moz-linear-gradient(top, rgba(252,252,252,0.5), rgba(247,247,247,0.5) 3%, rgba(242,242,242,0.5) 12%, rgba(217,217,217,0.5) 90%, rgba(191,191,191,0.5));
+			background-image: -o-linear-gradient(top, rgba(252,252,252,0.5), rgba(247,247,247,0.5) 3%, rgba(242,242,242,0.5) 12%, rgba(217,217,217,0.5) 90%, rgba(191,191,191,0.5));
+			background-image: -ms-linear-gradient(top, rgba(252,252,252,0.5), rgba(247,247,247,0.5) 3%, rgba(242,242,242,0.5) 12%, rgba(217,217,217,0.5) 90%, rgba(191,191,191,0.5));
+			background-image: linear-gradient(to bottom, rgba(252,252,252,0.5), rgba(247,247,247,0.5) 3%, rgba(242,242,242,0.5) 12%, rgba(217,217,217,0.5) 90%, rgba(191,191,191,0.5));
+			-webkit-box-shadow: 7px 2px 7px 2px rgba(110,112,80,0.75);
+			-moz-box-shadow: 7px 2px 7px 2px rgba(110,112,80,0.75);
+			box-shadow: 7px 2px 7px 2px rgba(110,112,80,0.75);}
+		a {display: block;
+			width: 100%}
+		a:visited {color: blue;}
+	</style>
+	<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.6.3/jquery.min.js"></script>
+	<script>
+		$(function() {
+		    var aFotos = []
+                aFotos[0] = new Image(),
+                aFotos[1] = new Image();
+			aFotos[0].src = "images/537278_luis_royo.jpg";
+			aFotos[0].alt = "Sin título - Luis Royo";
+			aFotos[0].title = "Sin título - Luis Royo";
+			aFotos[1].src = "images/205356_luis_royo.jpg";
+			aFotos[1].alt = "Multiplied by Ice - Luis Royo - Secrets";
+			aFotos[1].title = "Multiplied by Ice - Luis Royo - Secrets";
+
+			//$('img').attr('src', oFoto1.src);
+			//----------------------------------------------
+			
+			$('a').click(function(oEvent){
+			    var i = oEvent.currentTarget.getAttribute("data-img")
+			    $('img').attr('src', aFotos[i].src).
+                         attr('alt', aFotos[i].alt).
+                         attr('title', aFotos[i].title);
+	        }); // fin del img click
+	    }); // fin del ready
+	</script>  
+
+</head>
+
+<body>
+	<h1>Cambiando una imágen</h1>
+	<ul>
+		<li><a id="foto1" href="#" data-img="0">Una de Luis Royo</a></li>
+		<li><a id="foto2" href="#" data-img="1">Más de lo mismo</a></li>
+	</ul>	
+    <!--<p><img alt="Imágenes que cambian" title="Imágenes que cambian"/></p>-->
+	<p><img alt="" title=""/></p>
+</body>
+</html>

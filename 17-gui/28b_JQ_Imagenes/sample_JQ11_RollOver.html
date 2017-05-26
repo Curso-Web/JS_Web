@@ -1,0 +1,44 @@
+﻿<!DOCTYPE html>
+
+<html lang="es">
+<head>
+	<meta name="keywords" content="web, learning, html5, css3">
+	<meta name="author" content="Alejandro" >
+	<meta name="application-name" content="…">
+	<meta name="description" content="Ejercicios de HTML5">
+	<meta name="generator" content="Bluefish 2.2.4" >
+	<meta charset="UTF-8">
+	<title>Imágenes</title>
+	<link rel="stylesheet" href="default.css">
+	<link rel="shortcut icon" href="fav_icon.png">
+	<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
+	<script>
+        var oFoto1 = new Image(), oFoto2 = new Image();
+        oFoto1.src = "images/537278_luis_royo.jpg";
+        oFoto2.src = "images/205356_luis_royo.jpg";
+		$(function() {
+			var imgsWidth = 600;
+		    oFoto1.width = imgsWidth;	
+		    oFoto2.width = imgsWidth;
+			$('img').attr('src', oFoto1.src);
+			$('img').attr('width', oFoto1.width);
+		    //----------------------------------------------
+			$('img').hover(function(){
+					$(this).attr('src', oFoto2.src);
+					$(this).attr('width', oFoto2.width);
+				}, // hover: raton encima
+				function(){
+					$(this).attr('src', oFoto1.src);			
+					$(this).attr('width', oFoto1.width);
+				} // hover, ratón debajo
+			); // fin del img hover						
+	}); // fin del ready
+	</script>  
+
+</head>
+
+<body>
+	<h1>Cambiando una imágen</h1>
+	<p><img alt="Imágenes que cambian" title="Imágenes que cambian"/></p>
+</body>
+</html>

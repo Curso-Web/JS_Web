@@ -1,0 +1,153 @@
+﻿<!DOCTYPE HTML>
+<html lang="es">
+
+<head>
+	<meta charset="UTF-8">
+	<title>Formulario - JavaScript</title>
+	<meta name="description" content="Ejercicios del Curso CMF">
+	<meta name="author" content="Alejandro">
+  	<link rel="shortcut icon" href="fav_icon.png">
+  	<link rel="stylesheet" href="default.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/modernizr/2.8.3/modernizr.min.js"></script>
+  	<script>
+        // The .bind method from Prototype.js 
+        // Se encorpora el método bind, en caso de que no esté implementado
+        if (!Function.prototype.bind) { // check if native implementation available
+            Function.prototype.bind = function () {
+                var fn = this, args = Array.prototype.slice.call(arguments),
+                    object = args.shift();
+                return function () {
+                    return fn.apply(object,
+                      args.concat(Array.prototype.slice.call(arguments)));
+                };
+            };
+        }
+
+        function main() {
+            var oFormulario = {
+                oEvento: {},
+                oDatos: {},
+                oLista: document.getElementById("listaDatos"), // referencia del párrafo donde escribir
+                recogeDatos: function (oE) {
+                    // manejadora del evento submit del formulario:
+                    // disparada sólo despues de la validación HTML5
+                    this.oEvento = oE || window.evnet;
+                    var inputs = document.querySelectorAll("input[type='text']")
+                    for (var i = 0; i < inputs.length; i++) {
+                        this.oDatos[inputs[i].name] = inputs[i].value;
+                    }
+                    this.oDatos.Comentarios = document.getElementById("Comentarios").value;
+                    this.escribeDatos();
+                }, //Fin del método recogeDatos
+                escribeDatos: function () {
+                    //anula el comportamiento por defecto de submit
+                    //incluida la validacion de los requireds
+                    //que ya se ha realizado para poder llegar aqui
+                    this.oEvento.preventDefault();
+                    //ocultar formulario
+                    document.getElementById("form_1").classList.add("oculto")
+                    //mostrar bloque div para el resultado
+                    document.getElementById("resultado").classList.remove("oculto");
+                    // limpiar el nodo <ul> donde se presentarán los datos
+                    this.oLista.innerHTML = "";
+                    //incorporamos a la lista cada elemento del objeto		
+                    for (var i in this.oDatos) {
+                        this.oLista.innerHTML += "<li>" + i + ": <strong>" +
+                            this.oDatos[i] + "</strong></li>";
+                    };
+                }, //Fin del método escribedatos	
+            }; // Fin del objeto oFormulario
+            
+            //document.getElementById("submit").addEventListener("click",
+            //   oFormulario.recogeDatos.bind(oFormulario));
+
+            // En lugar de responder al evento click del boton enviar
+            // Respondemos al evento submit del formulario, 
+            // desencadenado por el boton pero POSTERIOR
+            // al proceso de validación HTML
+
+            document.getElementById('form_1').addEventListener("submit",
+                oFormulario.recogeDatos.bind(oFormulario))
+
+
+                
+        } // Fin de la función main()
+
+	    document.addEventListener("DOMContentLoaded", main, false);
+	//metodo de DOM nivel 2  que indica al agente de usuario que permanezca atento:
+	// evento: en este caso la carga completa de la página
+	// función a lanzar: en este caso iniciaBoton
+	// orden del flujo de eventos: false salta la fase de captura
+	 // equivale a  window.onload = iniciaBoton; 	
+
+	</script>
+</head>
+
+ <body>
+     <div class="container">
+
+         <header>
+             <h1 title="Formulario 1">
+                 Inscripción como docente (Microfórum)
+             </h1>
+         </header>
+         <aside>
+             <noscript>
+                 <p>
+                     <em>
+                         Si lees este mensaje es que tu navegador no
+                         ejecuta guiones JavaScript
+                     </em>
+                 </p>
+             </noscript>
+         </aside>
+         <article>
+             <form name="form_1" id="form_1">
+                 <fieldset name="fset1">
+                     <legend>Datos personales</legend>
+                     <p>
+                         <label for="Nombre">Nombre:</label>
+                         <input type="text" id="Nombre" name="Nombre" maxlength="50" placeholder="Escriba su nombre"
+                                pattern="^[A-ZÀ-Þ]+([A-ZÀ-Þa-zß-ÿ' ]+)" required>
+                     </p>
+                     <p>
+                         <label for="Apellidos">Apellido:</label>
+                         <input type="text" id="Apellidos" name="Apellidos" maxlength="100" placeholder="Escriba sus apellidos" pattern="^[A-ZÀ-Þ]+([A-ZÀ-Þa-zß-ÿ' ]+)" required>
+                     </p>
+                     <p>
+                         <label for="Direccion">Domicilio:</label>
+                         <input type="text" id="Direccion" name="Direccion" size="30" maxlength="200" placeholder="Escriba su dirección">
+                     </p>
+                     <p>
+                         <label for="Ciudad">Ciudad:</label>
+                         <input type="text" id="Ciudad" name="Ciudad" placeholder="Escriba su ciudad">
+                     </p>
+                     <p>
+                         <label class="top" for="Comentarios">Comentarios:</label>
+                         <textarea id="Comentarios" name="Comentarios" placeholder="Escriba los comentarios que consideres oprtunos"> </textarea>
+                     </p>
+
+                 </fieldset>
+                 <fieldset name="fset2">
+                     <p>
+                         <label for="submit"></label>
+                         <input id="submit" name="submit" type="submit" value="Aceptar"> &nbsp;
+                         <input id="reset" name="reset" type="reset" value="Borrar">
+                     </p>
+                 </fieldset>
+             </form>
+
+             <div id="resultado" class="oculto">
+                 <h2>Los datos del usuario son los siguientes</h2>
+                 <ul id="listaDatos"> </ul>
+             </div>
+
+         </article>
+         <footer>
+             <p>&copy; Copyright  by  Alejandro L. Cerezo</p>
+             <p><a href="mailto:alcerezo@microforum.es">alcerezo@micorforum.es</a></p>
+         </footer>
+    </div>
+</body>
+
+</html>

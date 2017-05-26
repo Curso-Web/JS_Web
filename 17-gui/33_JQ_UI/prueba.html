@@ -1,0 +1,196 @@
+<!DOCTYPE HTML>
+<html lang="es">
+
+<head>
+	<meta charset="UTF-8">
+	<title>Hola Mundo - HTML_001</title>
+	<meta name="description" content="Ejercicios del Curso ASI">
+	<meta name="author" content="Alejandro">
+  	<link rel="shortcut icon" href="/favicon.ico">
+  	<link rel="stylesheet" href="default.css">
+  	<link rel="stylesheet" href="jquery-ui/jquery-ui.min.css">
+	<style>
+		fieldset>div {
+			margin: 1.5em auto 0.2em;	
+		}
+		label {
+			display: inline-block;
+			width: 20%;
+			padding-right: 2em;
+			
+		}
+		select {
+      		width: 200px;
+    	}
+    	div.error {
+    		margin-top: 0px;
+    		color: maroon;
+    	}
+    	div.error label {
+			width: 90%;
+			text-align: center;
+    	}
+	</style>
+</head>
+
+ <body>
+  
+  	<header>
+  		<h1>Formulario JQuery UI</h1>
+	</header>
+	<article>
+		<form id="register" method="post" action="javascript:void(0)">
+		    <fieldset>
+		    	<div>
+		    		<label for="name">Nombre</label>
+			      	<input type="text" name="name" id="name" value="" 
+			      		class="text ui-widget-content ui-corner-all">
+			    </div>
+			    <div class="error"></div>
+			    <div>
+				    <label for="email">Email</label>
+				    <input type="text" name="email" id="email" value="" 
+				    	class="text ui-widget-content ui-corner-all">			    	
+			    </div>
+			    <div class="error"></div>
+			    <div>
+				    <label for="cpostal">Código Postal</label>
+				    <input type="text" name="cpostal" id="cpostal" value="" 
+				    	class="text ui-widget-content ui-corner-all">			    	
+			    </div>			    
+			    <div class="error"></div>
+			    <div>
+				    <label for="password">Password</label>
+				    <input type="password" name="password" id="password" value="" 
+				    	class="text ui-widget-content ui-corner-all">
+		 		</div>
+			    <div class="error"></div>
+			    <div>
+				    <label for="confirm_password">Repetir Password</label>
+				    <input type="password" name="confirm_password" id="confirm_password" value="" 
+				    	class="text ui-widget-content ui-corner-all">
+		 		</div>
+			    <div class="error"></div>
+		 		<div>
+		 			<label for="edad">Edad:</label>
+  					<input id="edad" name="edad" min=18
+  					class="ui-widget-content ui-corner-all">
+  					<div class="error"></div>
+		 		</div>			    
+		 		<div>
+		 		    <label for="speed">Nivel</label>
+				    <select name="speed" id="speed"
+				    class="ui-widget-content ui-corner-all">
+				      <option>Principiante</option>
+				      <option>Iniciado</option>
+				      <option selected="selected">Intermedio</option>
+				      <option>Experto</option>
+				      <option>Maestro</option>
+				    </select>		 			
+		 		</div>
+		 		<div>
+		 			<label for="datepicker">Fecha de solicitud</label>
+		 			<input type="text" id="datepicker"
+		 			class="ui-widget-content ui-corner-all">
+		 		</div>
+		 		<div>
+		 			<label for="btn1"></label>
+		 			<input type="submit" id="btn1" tabindex="-1">		
+		 		</div>
+		      <!-- Allow form submission with keyboard without duplicating the dialog button -->		      
+		    </fieldset>
+	  </form>
+		<p><span id="saludo"> </span><strong> </strong></p>
+	</article>
+	<footer>
+		<hr>
+		<p>by Alejandro L. Cerezo <br> alce65@hotmail.es</p>
+	</footer>
+ 
+ 	<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+ 	<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.15.0/jquery.validate.js"></script>
+ 	<script src="jquery-ui/jquery-ui.min.js"></script>
+	<script>
+		$(function() {
+			$( "#datepicker" ).datepicker();
+			$( "#edad" ).spinner();
+			$( "#speed" ).selectmenu();
+			$('#register').submit(function(e) {
+            e.preventDefault();
+	        }).validate({	        	
+	            debug: false,
+	            errorPlacement: function(error, element) {
+				    error.appendTo( element.parent().next("div") );
+				  },
+	            rules: {
+	                "name": {
+	                    required: true
+	                },
+	                // "surname": {
+	                //     required: true
+	                // },
+	                // "surname2": {
+	                //     required: true
+	                // },
+	                "email": {
+	                    required: true,
+	                    email: true
+	                },
+	                "cpostal": {
+	                    required: true,
+	                    number:true,
+	                    minlength: 5,
+	                    maxlength: 5
+	                },
+	              	"password": {
+						required: true,
+						minlength: 5
+					},
+					"confirm_password": {
+						required: true,
+						minlength: 5,
+						equalTo: "#password"
+					},
+	                "edad": {
+	                	required: true,	                	
+	                }
+	            },
+	            messages: {
+	                "name": {
+	                    required: "Introduce tu nombre."
+	                },
+	                "surname": {
+	                    required: "Apellido obligatorio."
+	                },
+	                "surname2": {
+	                    required: "Apellido obligatorio."
+	                },
+	                "email": {
+	                    required: "Introduce tu correo.",
+	                    email: ""
+	                },
+	                "cpostal": {
+	                    required: "Introduce tu código postal.",
+	                    number: "Introduce un código postal válido.",
+	                    maxlength: "Debe contener 5 dígitos.",
+	                    minlength: "Debe contener 5 dígitos."
+	                },
+	                "password": {
+						required: "Introduce una contraseña",
+						minlength: "La contraseña debetener al menos 5 caracteres de longitud"
+					},
+					"confirm_password": {
+						required: "Introduce una contraseña",
+						minlength: "La contraseña debetener al menos 5 caracteres de longitud",
+						equalTo: "Las dos contraseñas no coinciden"
+					},
+	                "edad": {
+	                required: "Introduce tu edad."	
+	                }
+	            }
+	        });
+		});
+	</script>  
+ </body>
+
+</html>

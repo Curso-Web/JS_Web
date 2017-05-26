@@ -1,0 +1,89 @@
+﻿<!DOCTYPE HTML>
+<html lang="es">
+
+<head>
+	<meta charset="UTF-8">
+	<title>Sticky Menu - JQ</title>
+	<meta name="description" content="Ejercicios del Curso ASI">
+	<meta name="author" content="Alejandro">
+  	<link rel="shortcut icon" href="fav_icon.png">
+  	<link rel="stylesheet" href="default.css">
+	<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+	<script>
+		$(function() {
+		    var altura = $('.menu').offset().top;
+
+		    $(window).on('scroll', function () {
+		        if ($(window).scrollTop() > altura) {
+		            $('.menu').addClass('menu-fixed');
+		        } else {
+		            $('.menu').removeClass('menu-fixed');
+		        }
+		    });
+		});
+	</script>  
+</head>
+
+ <body>
+  
+  	<header>
+          <figure class="logo">
+              <img src="logo.png" alt="Logo">
+          </figure>
+          <div>
+              <h1>Ediciones Boracay</h1>
+          </div>          
+	</header>
+     <nav class="menu">
+         <ul>
+             <li><a href="#">Inicio</a></li>
+             <li><a href="#">Blog</a></li>
+             <li><a href="#">Proyectos</a></li>
+             <li><a href="#">Trabajos</a></li>
+             <li><a href="#">Contacto</a></li>
+         </ul>
+     </nav>
+     
+     <article>
+         
+         <h2>Lo fantástico</h2>
+
+         <p id="p1">Lo fantástico es un <strong>género</strong> de la literatura que ha suscitado una gran cantidad de estudios y reflexiones. Por ejemplo, los teóricos franceses <span class="Autor">Louis Vax</span> (1924) y <span class="Autor">Roger Caillois</span> (1913-1978) han escrito sendos ensayos en los que definen las causas de lo fantástico en un relato. Para ambos, la fantasía implica una transgresión del mundo real en el cual habita el personaje, un mundo real con el cual está familiarizado el lector. Así, en su libro, <span class="Autor">Louis Vax</span> argumenta que <q cite="L'art et la littérature fantastiques (1960)" title="L'art et la littérature fantastiques (1960)">la narración fantástica se deleita en presentarnos a hombres como nosotros situados súbitamente en presencia de lo inexplicable, pero dentro de nuestro mundo real</q>. <span class="Autor">Roger Caillois</span> por su parte, lo define como <q cite="Au cœur du fantastique (1965)" title="Au cœur du fantastique (1965)">un escándalo, una rajadura, una irrupción insólita, casi insoportable en el mundo real</q>.</p>
+         <figure>
+             <img src="neuromante_chichoni.jpg" />
+         </figure>
+         <p id="p2">El género literario de lo fantástico muchas veces es confundido con otros géneros como la ciencia ficción o el terror. De hecho, la palabra "fantástico" ha sido utilizada en contextos tan variados, que ha perdido gran parte de su significado intrínseco. Las diversas tendencias críticas que han examinado este fenómeno literario, no logran ponerse de acuerdo y sus análisis muchas veces resultan contradictorios. Tanto para el ensayista francés <span class="Autor">Marcel Schneider</span> (1913), como para el profesor de Lengua Inglesa en la Universidad de Michigan <span class="Autor">Eric S. Rabkin</span> (1946), todo tipo de <strong>ficción no realista</strong> es fantástico.</p>
+         <p id="p3">Como es evidente, la literatura fantástica se desarrolló principalmente en el campo de la narrativa y, con especial vitalidad, en el ámbito del <strong>cuento</strong> que permite un tratamiento más escurri­dizo y alusivo de las situaciones imaginarias. Es así que, culmina <span class="Autor">Jaime Rest</span>, <q cite="Conceptos de literatura moderna (1979)" title="Conceptos de literatura moderna (1979)">la <strong>variedad de especies</strong> que admite esta producción es múltiple: el horror, lo sobrenatural, lo mons­truoso, lo indeterminado, la especulación metafí­sica, la conciencia de la culpa o del pecado e in­numerables experiencias humanas de índole fron­teriza y penumbrosa han logrado canalizarse en el área fantástica</q>.</p>
+         <hr />
+         <p class="Fuentes">Textos recogidos de direrentes fuentes en Internet que recogen citas diversas de las fuentes citadas
+
+	</article>
+     <article>
+         <h2>Trilogía del Spawl - William Gibson</h2>
+
+         <p>Despídete de todos los futuros rancios. He aquí un mundo enteramente nuevo, intenso como una sacudida eléctrica. La prosa de William Gibson, asombrosa por su claridad y oficio, se convierte en poesía eléctrico-tecnológica... Una fascinante historia de aventuras, brillante y coherente como un láser.</p>
+
+         <p>William Gibson cuya primera novela El Neuromante puede llamarse la novela ciberpunk, es la llanta mas refulgente del movimiento. Epica en escala, mezcla alta tecnologia con una sensibilidad de cine negro, una especie de Homero que escribe la Odisea saliendole de microchips.</p>
+
+         <p>La ficción moderna se retira a pequeños cuartos construidos con las neurosis del presente, unos pocos visionarios están creando una macroficción extrema, madura de ideas, bien escrita, y que ilustra adecuadamente esta época de comunicación global instantánea... William Gibson es la llama más ardiente de ese movimiento.</p>
+
+
+        <h3>Neuromante</h3>
+         <p>Un futuro invadido por microprocesadores, en el que la información es la materia prima. Vaqueros como Henry Dorrett Case se ganan la vida hurtando información, traspasando defensas electrónicas, bloques tangibles y luminosos, como rascacielos geométricos. En este espeluznante y sombrío futuro la mayor parte del este de Norteamérica es una única y gigantesca ciudad, casi toda Europa un vertedero atómico y Japón una jungla de neón, corruptora y brillante, donde una persona es la suma de sus vicios.</p>
+         
+         <h3>Conde Cero</h3>
+         <p>Siete años después de los acontecimientos de Neuromante, el Conde Cero, pirata de sistemas de información, consigue una rara pieza de software, se conecta a la matriz, y casi pierde la cabeza. La Matriz de Ciberespacio, una base sinérgica que abarca todo el planeta, se ha transformado en una red sensitiva. Pero la humanidad no se ha dado cuenta. La muchacha cuyo sistema nervioso ha sido alterado para que pueda tener acceso a la Matriz, tampoco entiende lo que ocurre. Mientras, en Francia, la encargada de una galería trata de encontrar al misterioso y desconocido creador de ciertos objetos de arte, poderosos y únicos.</p>
+
+         <h3>Mona Lisa Acelerada</h3>
+         <p>En el universo alucinatorio del cyberespacio, a la vez lírico y mecánico, erótico y violento, la vida de la joven Mona se cruza inevitablemente con la vida de la famosa Angie Mitchell. Angie ha sido capaz desde niña de entrar en el cyberespacio sin necesidad de una computadora. Dentro de la matriz una entidad fantasmal -que ha acumulado vastas cantidades de información para obtener lo que quiere- pretende utilizar a Angie en una trama que ella misma no puede controlar, ni siquiera entender. Mientras tanto, detrás de todo, se mueve la sombría Yakuza, la despiadada y poderosa internacional japonesa que manipula -o cree manipular-gentes y acontecimientos.</p>
+
+     </article>
+	<footer>
+		<hr>
+        <address>
+            Alejandro L. Cerezo alcerezo@movistar.es
+        </address>
+	</footer>
+ </body>
+
+</html>

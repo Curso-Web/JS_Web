@@ -1,0 +1,176 @@
+﻿<!DOCTYPE HTML>
+<html lang="es">
+
+<head>
+	<meta charset="UTF-8">
+	<title>Formulario - JavaScript</title>
+	<meta name="description" content="Ejercicios del Curso CMF">
+	<meta name="author" content="Alejandro">
+  	<link rel="shortcut icon" href="fav_icon.png">
+  	<link rel="stylesheet" href="css/default.css">
+  	<style type="text/css">
+  		.oculto {display: none;}
+  		.bloque {display: block;}
+  	</style>
+  	<script>
+
+	class Formulario {
+		constructor () {
+			this.oName = document.querySelector("#fname"),
+			this.oApell = document.querySelector("#apell"),
+			this.oAddress = document.querySelector("#address"),
+			this.oCity = document.querySelector("#city"),
+			this.oComent = document.querySelector("#coment"),
+			this.aJoomla = document.querySelectorAll("[name = pregunta]")
+			this.oCond = document.querySelector("#condiciones"),
+			this.oCond1 = document.querySelector("#condiciones_1"),
+			this.oOpciones = document.querySelector("#opciones"),
+			this.oParrafo = document.querySelector("#parrafo_1"), // referencia del párrafo donde escribir
+			this.aSalida = []
+			this.oName.focus();	
+		}
+
+		getTextos () {
+			this.aSalida = [
+				{etiqueta : "Nombre", valor : this.oName.value},
+				{etiqueta : "Apellidos", valor : this.oApell.value},
+				{etiqueta : "Dirección", valor : this.oAddress.value},
+				{etiqueta : "Ciudad", valor : this.oCity.value},
+				{etiqueta : "Comentarios", valor : this.oComent.value}
+			]
+		}; //Fin de la función getTextos 
+
+		getRRadiobuttons () {				
+			for(let i=0; i < this.aJoomla.length; i++) {
+				if (this.aJoomla[i].checked) {
+					this.aSalida[this.aSalida.length] = {
+						etiqueta : "Preparado para dar Joomla!", valor : this.aJoomla[i].value.toUpperCase()}
+				};
+			};
+		}; //Fin de la función getRRadiobuttons
+
+		getCheckbox () {
+			if (this.oCond.checked) {
+				this.aSalida[this.aSalida.length] = {etiqueta : "Condiciones leidas!", valor : "SI"}
+			} 
+			else{
+				this.aSalida[this.aSalida.length] =  {etiqueta : "Condiciones leidas!", valor : "NO"};		
+			};	
+			if (this.oCond1.checked) {
+				this.aSalida[this.aSalida.length] = {etiqueta : "Condiciones leidas 2!", valor : "SI"}
+			} 
+			else{
+				this.aSalida[this.aSalida.length] =  {etiqueta : "Condiciones leidas 2!", valor : "NO"}	
+			};
+		}; //Fin de la función getCheckbox
+
+		getSelectOptions () {
+			let oOpcion = this.oOpciones.options[this.oOpciones.selectedIndex];
+			var textoSeleccionado = oOpcion.text; // Segundo valor
+			var valorSeleccionado = oOpcion.value; // 2
+			this.aSalida[this.aSalida.length] = {etiqueta : "Nivel de JavaScript", valor : textoSeleccionado} 
+		}; //Fin de la función getSelectOptions
+
+
+		recogeDatos () {
+			// Llamada a las funciones get de cada conjunto de controles
+			this.getTextos();
+			this.getRRadiobuttons();
+			this.getCheckbox();
+			this.getSelectOptions();
+			//llamada a la función que procesara el arry presentandolo en pantalla
+			this.escribeDatos ();
+		} // Fin de la funcion recogeDatos
+
+		escribeDatos () {
+			//ocultar formulario
+			document.querySelector("#form_1").className = "oculto";
+			//mostrar bloque div para el resultado
+			document.querySelector("#resultado").className = "bloque";
+			//incorporamos al parrafo cada línea del array		
+			for (var i = 0; i < this.aSalida.length; i++) {
+				this.oParrafo.innerHTML 		  
+					+= `<strong> ${this.aSalida[i].etiqueta} : </strong>
+					${this.aSalida[i].valor}</br>
+			`};
+		} // Fin de la funcion escribeDatos
+	} // Fin de la clase formulario
+
+	
+	document.addEventListener("DOMContentLoaded", function () {
+			oFormulario = new Formulario
+			document.querySelector("#submit").addEventListener("click", oFormulario.recogeDatos.bind(oFormulario))
+		}, false);	
+	</script>
+</head>
+
+ <body>
+ <!--body  onload="alert('Página cargada - OK');"-->
+ 
+ 
+  	<header>
+  	<h1 title="Formulario 1">
+  		Inscripción como docente (Tajamar)
+    </h1>
+	</header>
+	<article>
+ 		<form name ="form_1" id="form_1" method="post" action="mailto:alcerezo@microforum.es" enctype="text/plain">
+ 		  	<fieldset><legend>Datos personales</legend>
+		  	<p><label for="fname">Nombre:</label>
+ 		  		<input type="text" id="fname" name="fname" size="30" placeholder="Escriba su nombre"></p>
+	      	<p><label for="apell">Apellido:</label>
+	      		<input type="text" id="apell" name="apell" size="30" maxlength="100" placeholder="Escriba sus apellidos"></p>      
+	      	<p><label for="address">Domicilio:</label>
+	      		<input type="text" id="address" name="address" size="30"maxlength="200" placeholder="Escriba su dirección"></p>
+	    	<p><label for="city">Ciudad:</label>
+	    		<input type="text" id="city" name="city" placeholder="Escriba su ciudad"></p> 
+			<p><label for="coment">Comentarios:</label>
+				<textarea id="coment" name="coment" placeholder="Escriba los comentarios que consideres oprtunos"></textarea></p>
+			</fieldset>	
+
+			<fieldset><legend>Datos técnicoss</legend>
+		  	<p><label for="pregunta">¿Estas preparado para dar un curso de Joomla!?</label>	
+			<input type="radio" value="si" name="pregunta" id="pregunta_si"/> SI
+			<input type="radio" value="no" name="pregunta" id="pregunta_no"/> NO
+			<input type="radio" value="nsnc" name="pregunta" id="pregunta_nsnc"/> NS/NC
+			</p>
+			<p>
+			<input type="checkbox"  id="condiciones" value="condiciones" name="condiciones">
+			<label for="condiciones">He leído y acepto las condiciones</label>
+			</p>
+			<p>
+			<input type="checkbox"  id="condiciones_1" value="condiciones_1" name="condiciones_1">
+			<label for="condiciones">He leído y acepto las condiciones 2</label>
+			</p>
+			<p><label for="opciones">Tu nivel de JavaScript es</label>
+			<select id="opciones" name="opciones">
+				<option value="1">Muy Alto</option>
+				<option value="2">Alto</option>
+				<option value="3">Medio</option>
+				<option value="4">Bajo</option>
+			</select>					
+			</p>
+			</fieldset>
+			<fieldset>
+			<p><input id="submit" type="button" value="Aceptar"> &nbsp; 
+				<input id="reset" type="reset" value="Borrar"></p>
+			</fieldset>
+		</form>
+		<div id="resultado" class="oculto">
+			<h2>Los datos del usuario son los siguientes</h2>			
+		<p id="parrafo_1"> </p>
+		</div>	
+
+ 		<script>
+   			//<!--document.write("Hola Mundo");
+			//-->
+        </script>
+	</article>
+	<footer>
+		<p>
+			&copy; Copyright  by Alejandro L. Cerezo
+		</p>
+	</footer>
+ </body>
+
+</html>

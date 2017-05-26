@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html>
+  <head>
+      <title>Chapter 07 Slider</title>
+      <link rel="stylesheet" type="text/css" href="sample.css" />
+      <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
+      <script>
+
+          $(function () {
+              var domContenedor = $("#slider");
+              var domLista = domContenedor.children("ul");
+              var domItems = domLista.children("li");
+              var domBotones = domContenedor.children(".button");
+
+              var animateSlider = function (direction, duration, callback) {
+                  domLista.stop(true, true).animate({
+                      "margin-left": direction + "=300px"
+                  }, duration, callback);
+              };
+
+              var isAtStart = function () {
+                  return parseInt(domLista.css("margin-left"), 10) > -300;
+              };
+
+              var isAtEnd = function () {
+                  var imageWidth = domItems.first().width();
+                  var imageCount = domItems.length;
+                  var maxMargin = -1 * (imageWidth * (imageCount - 2));
+                  return parseInt(domLista.css("margin-left"), 10) < maxMargin;
+              }
+
+              domBotones.on("click", function () {
+                  var isBackBtn =  $(this).hasClass("back");
+                  if ((isBackBtn && isAtStart()) || (!isBackBtn && isAtEnd())) { return; }
+                  animateSlider((isBackBtn ? "+" : "-"), 1000);
+              });
+
+          });
+
+      </script>
+  </head>
+  <body>
+    <div id="slider">
+      <ul>
+        <li><img src="images/diana_of_bitru_300.jpeg" alt="Kitten" /></li>
+        <li><img src="images/eyes_300.jpeg" alt="Kitten" /></li>
+        <li><img src="images/fissures_of_the_breeze_300.jpeg" alt="Kitten" /></li>
+        <li><img src="images/golden_kabala_300.jpeg" alt="Kitten" /></li>
+      </ul>
+      <span class="button back">Back</span>
+      <span class="button next">Next</span>
+    </div>
+  </body>
+</html>
