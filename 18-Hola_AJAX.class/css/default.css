@@ -1,0 +1,62 @@
+body {
+	margin: 3em 9em;
+	}
+header {
+	width: 50%;
+	margin: 2em auto 4em auto;
+	padding: 2em 1em;
+	background-color: maroon;
+	color: white;
+	color: beige;
+	border-radius: 20px;
+	box-shadow: 2px 2px 2px 2px silver;
+	}
+ footer {
+ 	margin-top:  2em;
+ 	border-top: solid 1px silver;
+ 	color: maroon;
+ 	}
+ header, footer {
+ 	text-align: center;
+ 	}
+
+article, section{
+	width: 80%;
+	margin: 1em auto;
+}		
+
+form {
+	width: 100%;
+	margin: 1em;
+	padding: 1em 0em;
+	background-color: beige;
+	overflow: hidden;
+	}				
+
+form label {
+	width: 40%;
+	margin: 1em auto;
+	display:inline-block;
+	text-align: right;
+	padding: 0 2em;
+}
+
+form input {
+	display: inline-block;
+	width: 40%;
+}
+p {
+	margin: 2em 2em 0em;
+}
+
+p + p {
+	margin-top: 0em;
+}		
+
+.destacado {
+	color: maroon;
+	font-family: Pacifico, fantasy;
+	font-size: 1.2em;
+	font-weight: 700;
+	padding-left: 0.3em;
+}		

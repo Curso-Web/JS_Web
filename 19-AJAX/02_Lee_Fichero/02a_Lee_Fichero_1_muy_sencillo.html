@@ -1,0 +1,93 @@
+﻿<!DOCTYPE html>
+
+<html lang="es">
+<head>
+	<meta name="keywords" content="web, learning, html5, css3">
+	<meta name="author" content="Alejandro" >
+	<meta name="application-name" content="…">
+	<meta name="description" content="Ejercicios de HTML5">
+	<meta name="generator" content="Bluefish 2.2.4" >
+	<meta charset="UTF-8">
+	<title>Hola Mundo con AJAX</title>
+	<link rel="shortcut icon" href="fav_icon.png">
+	<style type="text/css">
+		body { font: 13px Arial, Helvetica, sans-serif; }
+		h2 { margin-bottom: 0; font-size: 1.2em; }
+		article { float: left; width: 70%; }
+		aside { float: right; width: 25%; }		
+		#recurso, #enviar { padding: .3em; font-size: 1.2em; }
+		#contenidos, #estados, #cabeceras, #codigo {
+			border: 2px solid #CCC;
+			background: #FAFAFA;
+			padding: 1em;
+			white-space: pre;
+		}
+		#contenidos {
+			min-height: 400px;
+			max-height: 600px;
+			overflow: scroll;
+		}
+		#estados { min-height: 200px; }
+		#cabeceras { min-height: 200px; }
+		#codigo { min-height: 100px; font-size: 1.5em; }
+	</style>
+	
+	<script type="text/javascript">	 				
+		function muestraContenido() {
+			if(oPeticionHTTP.readyState == READY_STATE_COMPLETE && oPeticionHTTP.status == 200)
+			{
+				document.getElementById('contenidos').innerHTML = oPeticionHTTP.responseText;
+			}
+		} // fin de la función manejadora del evento onreadystatechange
+
+		const READY_STATE_UNINITIALIZED = 0;
+		const READY_STATE_LOADING = 1;
+		const READY_STATE_LOADED = 2;
+		const READY_STATE_INTERACTIVE = 3;
+		const READY_STATE_COMPLETE = 4;
+		var oPeticionHTTP;
+		
+		window.onload = function() {
+			document.getElementById('boton').onclick = function () {
+				// Obtener la instancia del objeto XMLHttpRequest
+				//var file = document.querySelector("#Nombre").value;
+				if (document.querySelector("#Nombre").value){
+					oPeticionHTTP = new XMLHttpRequest();
+					
+					if (oPeticionHTTP){
+						// Preparar la funcion de respuesta
+						// oPeticionHTTP.onreadystatechange = muestraContenido 
+						oPeticionHTTP.onreadystatechange = muestraContenido;
+					    // Realizar peticion HTTP
+						var pathFichero = "../_ficheros/" 
+						var sURL = pathFichero + document.querySelector("#Nombre").value + '?nocache=' + Math.random();
+						oPeticionHTTP.open('GET', sURL);
+						oPeticionHTTP.send(null);				
+					};
+				};								
+			}; // fin del manejador del onclick del boton 
+		};//fin del onload
+	</script>
+	
+</head>
+<body>
+	<form>
+		<datalist id="ficheros">
+			<option value="file01.txt">
+			<option value="file02.txt">
+			<option value="file03.txt">
+			<option value="historia.txt">
+			<option value="holamundo.txt">
+			<option value="Libro.1.json">
+		</datalist>
+		<label>Nombre del fichero
+		<input type="text" id="Nombre" name="Nombre" list="ficheros">
+		</label>
+		<input type="button" id="boton" name="boton" value="Leer Fichero" >			
+	</form>
+	<article id="principal">
+		<h2>Contenidos del archivo:</h2>
+		<div id="contenidos"></div>
+	</article>
+	
+</body>

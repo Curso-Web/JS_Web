@@ -1,0 +1,152 @@
+﻿<!DOCTYPE html>
+
+<html lang="es">
+<head>
+	<meta name="keywords" content="web, learning, html5, css3">
+	<meta name="author" content="Alejandro" >
+	<meta name="application-name" content="…">
+	<meta name="description" content="Ejercicios de HTML5">
+	<meta name="generator" content="Bluefish 2.2.4" >
+	<meta charset="UTF-8">
+	<title>Hola Mundo con AJAX</title>
+	<link rel="shortcut icon" href="fav_icon.png">
+	<style type="text/css">
+		body { font: 13px Arial, Helvetica, sans-serif; }
+		h2 { margin-bottom: 0; font-size: 1.2em; }
+		article { float: left; width: 70%; }
+		aside { float: right; width: 25%; }		
+		#recurso, #enviar { padding: .3em; font-size: 1.2em; }
+		#contenidos, #estados, #cabeceras, #codigo {
+			border: 2px solid #CCC;
+			background: #FAFAFA;
+			padding: 1em;
+		}
+		#contenidos {
+			min-height: 400px;
+			max-height: 600px;
+			overflow: scroll;
+		}
+		#estados { min-height: 200px; }
+		#cabeceras { min-height: 200px; }
+		#codigo { min-height: 100px; font-size: 1.5em; }
+		dt {float: left; 
+			clear: left;
+			width: 20%;
+			color: maroon;} /*Campo (termino)*/
+		dd {float: left;} /*Valor (definición)*/	
+	</style>
+	
+	<script type="text/javascript">
+        
+        var oAjax;
+        (function() {
+
+            // Propieddes privadas
+    
+            var pMetodo = '';
+            var pUrl = '';
+            var pFuncion =  '';
+
+            // Metodos privados
+
+            function inicializa_xhr  () {
+                if (window.XMLHttpRequest) {
+                    return new XMLHttpRequest();
+                }
+                else if (window.ActiveXObject) {
+                    return new ActiveXObject("Microsoft.XMLHTTP");
+                }
+            };
+
+            oAjax = {
+                
+                // Propiedades públicas
+                oPeticion: {},
+
+                // Metodos publicos (privilefiados)                
+                inicializa: function () {
+                    pMetodo = arguments[0];
+                    pUrl = arguments[1];
+                    pFuncion = arguments[2];
+                }, // fin de la función inicializadora de valores (like constructora)
+
+
+                cargaContenido: function () {
+                    // Obtener la instancia del objeto XMLHttpRequest
+                    this.oPeticion = inicializa_xhr();
+                    if (this.oPeticion) {
+                        // Preparar la funcion de respuesta
+                        this.oPeticion.onreadystatechange = pFuncion.bind(this);
+                        // Realizar peticion HTTP
+                        this.oPeticion.open(pMetodo, pUrl, true);
+                        this.oPeticion.send(null);
+                    }
+                } // Fin de la funcion manejadora del envento
+                  //que lanza AJAX (e.g. Window.onload)			
+            };
+        
+
+        }())
+
+        var oFormulario = {
+            pathFichero: "../_ficheros/", //Carpeta de ficheres
+            file: "", // Nombre del fichero
+            oConexion: {}, // Objeto Ajax
+            oLibro: {} // Objeto con los datos del fichero (Libro)
+        };
+
+        oFormulario.muestraContenido = function () {
+            if(this.oConexion.oPeticion.readyState == READY_STATE_COMPLETE 
+                && this.oConexion.oPeticion.status == 200)
+			{
+                this.oLibro = JSON.parse(this.oConexion.oPeticion.responseText);
+				var sLinea
+				document.getElementById('contenidos').innerHTML = "<dl>"
+				for (var i in this.oLibro){
+					sLinea = "<dt>" + i + "</dt><dd>" + this.oLibro[i] + "</dd>"
+					document.getElementById('contenidos').innerHTML += sLinea
+				}
+				document.getElementById('contenidos').innerHTML += "</dl>"
+			}
+		} // fin de la función manejadora del evento onreadystatechange
+
+        oFormulario.pulsarBoton = function () {
+            this.file = document.querySelector("#Nombre").value;
+            // Obtener la instancia del objeto XMLHttpRequest
+            if (this.file) {
+                //******************código de la petoicion						
+                this.oConexion = Object.create(oAjax);
+                //herencia var child = Object.create(parent
+                this.oConexion.inicializa("GET",
+                    this.pathFichero + this.file + '?nocache=' + Math.random(),
+                    this.muestraContenido.bind(this))
+                this.oConexion.cargaContenido();
+            };
+        }; // fin del manejador del onclick del boton 
+
+
+		const READY_STATE_UNINITIALIZED = 0;
+		const READY_STATE_LOADING = 1;
+		const READY_STATE_LOADED = 2;
+		const READY_STATE_INTERACTIVE = 3;
+		const READY_STATE_COMPLETE = 4;
+		
+		window.onload = function() {
+		    document.getElementById('boton').onclick = oFormulario.pulsarBoton.bind(oFormulario);
+		};//fin del onload
+	</script>
+	
+</head>
+<body>
+	<form>
+		<label>Nombre del fichero
+		<input type="text" id="Nombre" name="Nombre" value="Libro.1.json">
+		</label>
+		<input type="button" id="boton" name="boton" value="Leer Fichero" >			
+	</form>
+	<article id="principal">
+		<h2>Contenidos del archivo:</h2>
+		<div id="contenidos"></div>
+	</article>
+	
+</body>

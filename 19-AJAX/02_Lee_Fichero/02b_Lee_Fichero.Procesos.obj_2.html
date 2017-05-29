@@ -1,0 +1,179 @@
+﻿<!DOCTYPE html>
+
+<html lang="es">
+<head>
+	<meta name="keywords" content="web, learning, html5, css3">
+	<meta name="author" content="Alejandro" >
+	<meta name="application-name" content="…">
+	<meta name="description" content="Ejercicios de HTML5">
+	<meta name="generator" content="Aptana" >
+	<meta charset="UTF-8">
+	<title>Estados de la petición AJAX</title>
+	<link rel="shortcut icon" href="fav_icon.png">
+	<style type="text/css">
+		body { font: 13px Arial, Helvetica, sans-serif; }
+		h2 { margin-bottom: 0; font-size: 1.2em; }
+		#recurso, #enviar { padding: .3em; font-size: 1.2em; }
+		article { float: left; width: 70%; }
+		aside { float: right; width: 25%; }
+		#contenidos, #estados, #cabeceras, #codigo {
+			border: 2px solid #CCC;
+			background: #FAFAFA;
+			padding: 1em;
+			white-space: pre;
+		}
+		#contenidos {
+			min-height: 400px;
+			max-height: 600px;
+			overflow: scroll;
+		}
+		#estados { min-height: 200px; }
+		#cabeceras { min-height: 200px; }
+		#codigo { min-height: 100px; font-size: 1.5em; }
+	</style>
+	<script>
+
+        // Empleamos dos objetos, oAjax y oFormulario:
+        // en los métodos del segundo, se hace uso de métodos del primero:
+        // la clase A depende de la clase B
+
+        var oAjax = {
+            //READY_STATE_UNINITIALIZED: 0,
+            //READY_STATE_LOADING: 1,
+            //READY_STATE_LOADED: 2,
+            //READY_STATE_INTERACTIVE: 3,
+            //READY_STATE_COMPLETE: 4,
+
+            oPeticion: {},
+            pMetodo: '',
+            pUrl: '',
+            pFuncion: '',            
+
+            inicializa: function () {
+                this.pMetodo = arguments[0];
+                this.pUrl = arguments[1];
+                this.pFuncion = arguments[2];
+            }, // fin de la función inicializadora de valores (like constructora)
+
+            inicializa_xhr: function () {
+                if (window.XMLHttpRequest) {
+                    return new XMLHttpRequest();
+                }
+                else if (window.ActiveXObject) {
+                    return new ActiveXObject("Microsoft.XMLHTTP");
+                }
+            },
+
+            cargaContenido: function () {
+                // Obtener la instancia del objeto XMLHttpRequest
+                this.oPeticion = this.inicializa_xhr();
+                if (this.oPeticion) {
+                    // Preparar la funcion de respuesta
+                    this.oPeticion.onreadystatechange = this.pFuncion.bind(this);
+                    // Realizar peticion HTTP
+                    this.oPeticion.open(this.pMetodo, this.pUrl, true);
+                    this.oPeticion.send(null);
+                }
+            } // Fin de la funcion manejadora del envento
+            //que lanza AJAX (e.g. Window.onload)			
+        };
+		
+		var oFormulario = {
+			estadosPosibles : ['No inicializado', 'Cargando', 'Cargado', 'Interactivo',	'Completado'],
+			tiempoInicial : 0,
+			tiempoFinal : 0,
+			milisegundos: 0,
+			pathFichero : "../_ficheros/" ,
+			domRecurso: "", // Nodo DOM del campo para indicar el fichero (Id : 'recurso') 
+		                    // URL de la página : recurso.value = location.href;
+			domEstados: "", // Nodo DOM del div para presentar los estados (Id : 'estados'),
+			domContenidos: "", // Nodo DOM del div para presentar los contendos de los ficheros
+			domCabeceras: "", // Nodo DOM Id :'cabeceras'
+			domCodigo: "", // Nodo DOM Id :'codigo'
+
+            metodoMain : function () { //manejador del boton
+                this.domContenidos.innerHTML = "";
+                this.domEstados.innerHTML = "";
+
+                // Instanciar objeto oConexion
+
+               oAjax.inicializa("GET",
+                    this.pathFichero + this.domRecurso.value + '?nocache=' + Math.random(),
+                    this.muestraContenido.bind(this))
+                // Borrar datos anteriores
+                this.tiempoInicial = new Date();
+                oAjax.cargaContenido();
+
+                //var recurso = document.getElementById('recurso').value;
+            }, // Fin de la función 
+
+            muestraContenido: function () {
+                // manejadora de readystatechanges
+                this.tiempoFinal = new Date();
+                this.milisegundos = this.tiempoFinal - this.tiempoInicial;
+                this.domEstados.innerHTML += "[" + this.milisegundos + " mseg.] - " +
+				oAjax.oPeticion.readyState + ": " +
+				this.estadosPosibles[oAjax.oPeticion.readyState] + "<br/>";
+                if (oAjax.oPeticion.readyState == 4) {
+                    try {
+                        if (oAjax.oPeticion.status == 200) {
+                            this.domContenidos.innerHTML = oAjax.oPeticion.responseText;
+                        } else {
+                            throw "Error " + oAjax.oPeticion.status +
+                                " - " + oAjax.oPeticion.statusText;
+                        }
+                    }
+                    catch (error) {
+                        this.domContenidos.innerHTML = error;
+                    }
+
+                    this.domCabeceras.innerHTML = oAjax.oPeticion.getAllResponseHeaders();
+                    // muestraCabeceras
+
+                    this.domCodigo.innerHTML = oAjax.oPeticion.status + "<br/>" +
+                                                oAjax.oPeticion.statusText;
+                    // muestraCodigoEstado
+                } 
+            } // Fin de la funcion muestraContenido
+		} // Fin del objeto
+
+		window.onload = function () {
+		    oFormulario.domRecurso = document.getElementById('recurso');
+		    oFormulario.domEstados = document.getElementById('estados');
+		    oFormulario.domContenidos = document.getElementById('contenidos');
+		    oFormulario.domCabeceras = document.getElementById('cabeceras');
+		    oFormulario.domCodigo = document.getElementById('codigo');
+			document.getElementById('enviar').onclick = oFormulario.metodoMain.bind(oFormulario);
+		};
+		
+		// Función de respuesta
+	</script>
+	</head>
+	<body>
+		<form action="#">
+			<datalist id="ficheros">
+				<option value="file01.txt">
+				<option value="file02.txt">
+				<option value="file03.txt">
+				<option value="historia.txt">
+				<option value="holamundo.txt">
+				<option value="Libro.1.json">
+				<option value="protegido.txt">		
+			</datalist>
+			<label>URL: <input type="text" id="recurso" size="70" list="ficheros"></label>
+			<input type="button" id="enviar" value="Mostrar contenidos" />
+		</form>
+		<article id="principal">
+			<h2>Contenidos del archivo:</h2>
+			<div id="contenidos"></div>
+			<h2>Cabeceras HTTP de la respuesta del servidor:</h2>
+			<div id="cabeceras"></div>
+		</article>
+		<aside id="secundario">
+			<h2>Estados de la petición:</h2>
+			<div id="estados"></div>
+			<h2>Código de estado:</h2>
+			<div id="codigo"></div>
+		</aside>
+	</body>
+</html>

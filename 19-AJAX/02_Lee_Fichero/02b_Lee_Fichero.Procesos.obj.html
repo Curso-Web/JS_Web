@@ -1,0 +1,137 @@
+﻿<!DOCTYPE html>
+
+<html lang="es">
+<head>
+	<meta name="keywords" content="web, learning, html5, css3">
+	<meta name="author" content="Alejandro" >
+	<meta name="application-name" content="…">
+	<meta name="description" content="Ejercicios de HTML5">
+	<meta name="generator" content="Aptana" >
+	<meta charset="UTF-8">
+	<title>Estados de la petición AJAX</title>
+	<link rel="shortcut icon" href="fav_icon.png">
+	<style type="text/css">
+		body { font: 13px Arial, Helvetica, sans-serif; }
+		h2 { margin-bottom: 0; font-size: 1.2em; }
+		#recurso, #enviar { padding: .3em; font-size: 1.2em; }
+		article { float: left; width: 70%; }
+		aside { float: right; width: 25%; }
+		#contenidos, #estados, #cabeceras, #codigo {
+			border: 2px solid #CCC;
+			background: #FAFAFA;
+			padding: 1em;
+			white-space: pre;
+		}
+		#contenidos {
+			min-height: 400px;
+			max-height: 600px;
+			overflow: scroll;
+		}
+		#estados { min-height: 200px; }
+		#cabeceras { min-height: 200px; }
+		#codigo { min-height: 100px; font-size: 1.5em; }
+	</style>
+	<script>
+		
+		var oAjax = {
+			estadosPosibles : ['No inicializado', 'Cargando', 'Cargado', 'Interactivo',	'Completado'],
+			tiempoInicial : 0,
+			tiempoFinal : 0,
+			milisegundos : 0,
+			peticion : {},
+			pathFichero : "../_ficheros/" ,
+			recurso : "", // document.getElementById('recurso') // URL de la página : recurso.value = location.href;
+            estados : "", // document.getElementById('estados'),
+			cargaContenido : function () {
+				// Borrar datos anteriores
+				document.getElementById('contenidos').innerHTML = "";
+				document.getElementById('estados').innerHTML = "";
+				// Instanciar objeto XMLHttpRequest
+				if(window.XMLHttpRequest) {
+					this.peticion = new XMLHttpRequest();
+				}
+				else {
+					this.peticion = new ActiveXObject("Microsoft.XMLHTTP");
+				}
+				// Preparar función de respuesta
+				this.peticion.onreadystatechange = this.muestraContenido.bind(oAjax);
+				// Realizar petición
+				this.tiempoInicial = new Date();
+				//var recurso = document.getElementById('recurso').value;
+				this.peticion.open('GET', this.pathFichero + this.recurso.value + '?nocache=' + Math.random(), true);
+				this.peticion.send(null);
+			}, // Fin de la función 
+			muestraContenido : function() {
+				this.tiempoFinal = new Date();
+				this.milisegundos = this.tiempoFinal - this.tiempoInicial;
+				this.estados.innerHTML += "[" + this.milisegundos + " mseg.] - " +
+				this.peticion.readyState + ": " +
+				this.estadosPosibles[this.peticion.readyState] + "<br/>";
+				if(this.peticion.readyState == 4) {
+				    var contenidos = document.getElementById('contenidos');
+				    try {
+				        if (this.peticion.status == 200) {
+				            contenidos.innerHTML = this.peticion.responseText;
+				            //contenidos.innerHTML = peticion.responseText.transformaCaracteresEspeciales();
+				        } else {
+				            throw "Error " + this.peticion.status +
+                                " - " + this.peticion.statusText;
+				        }
+				    }
+				    catch (error) {
+				        contenidos.innerHTML = error;
+				    }
+					this.muestraCabeceras();
+					this.muestraCodigoEstado();
+				}
+			}, // Fin de la función muestraContenido
+			muestraCabeceras : function() {
+				var cabeceras = document.getElementById('cabeceras');
+				cabeceras.innerHTML =
+				//peticion.getAllResponseHeaders().transformaCaracteresEspeciales();
+				this.peticion.getAllResponseHeaders();
+			}, // Fin de la funion muestraCabeceras
+			muestraCodigoEstado : function () {
+				var codigo = document.getElementById('codigo');
+				codigo.innerHTML = this.peticion.status + "<br/>" + this.peticion.statusText;
+			} // Fin de la funcion muestraCodigoEstado
+
+		} // Fin del objeto
+		window.onload = function () {
+
+		    oAjax.recurso = document.getElementById('recurso');
+		    oAjax.estados = document.getElementById('estados');
+			document.getElementById('enviar').onclick = oAjax.cargaContenido.bind(oAjax);
+		};
+		
+		// Función de respuesta
+	</script>
+	</head>
+	<body>
+		<form action="#">
+			<datalist id="ficheros">
+				<option value="file01.txt">
+				<option value="file02.txt">
+				<option value="file03.txt">
+				<option value="historia.txt">
+				<option value="holamundo.txt">
+				<option value="Libro.1.json">
+				<option value="protegido.txt">		
+			</datalist>
+			<label>URL: <input type="text" id="recurso" size="70" list="ficheros"></label>
+			<input type="button" id="enviar" value="Mostrar contenidos" />
+		</form>
+		<article id="principal">
+			<h2>Contenidos del archivo:</h2>
+			<div id="contenidos"></div>
+			<h2>Cabeceras HTTP de la respuesta del servidor:</h2>
+			<div id="cabeceras"></div>
+		</article>
+		<aside id="secundario">
+			<h2>Estados de la petición:</h2>
+			<div id="estados"></div>
+			<h2>Código de estado:</h2>
+			<div id="codigo"></div>
+		</aside>
+	</body>
+</html>
